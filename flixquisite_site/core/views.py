@@ -6,12 +6,21 @@ from django.contrib import messages
 from .models import Movie
 from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
+@login_required(login_url='login')
 def index(request):
     movies = Movie.objects.all()
     get_movies = {'movies': movies}
     return render(request, 'index.html', get_movies)
+
+# Restrict view to logged in users
+# @login_required(login_url='login')
+def movie(request, pk):
+    movie_uu_id = pk
+    movie_attributes = Movie.objects.get(uu_id=movie_uu_id)
+    print('movie function hit')
+    print(movie_attributes)
+    attributes = {'movie_attributes' : movie_attributes}
+    return render(request, 'movie.html', attributes)
 
 def login(request):
     if request.method == 'POST':
@@ -64,6 +73,6 @@ def signup(request):
     
     return render(request, 'signup.html')
 
-def movies(request):
-    pass
+
+
 

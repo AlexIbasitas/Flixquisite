@@ -26,9 +26,9 @@ class Movie(models.Model):
     genre = models.CharField(max_length=50, default='No genre available', choices=GENRES)
     length = models.PositiveBigIntegerField(default=0)
 
-    image_carousel_card = models.ImageField(upload_to='images/', default='media/images/default_image.png')
-    image_feature_cover = models.FileField(upload_to='images/', default='media/images/default_image.png')
-    playback = models.FileField(upload_to='playback/', default='media/images/default_image.png')
+    image_carousel_card = models.ImageField(upload_to='images/', default='images/default_image.png')
+    image_feature_cover = models.FileField(upload_to='images/', default='images/default_image.png')
+    video = models.FileField(upload_to='movie/', default='images/default_image.png')
 
 
 
