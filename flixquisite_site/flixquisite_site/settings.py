@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'flixquisite_site.wsgi.application'
 # }
 
 # Add Postgres DB and make unapplied migrations
+# Access Django administration via createsuperuser 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
