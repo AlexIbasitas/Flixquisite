@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 import datetime
+from django.conf import settings
 
 # Create your models here.
 class Movie(models.Model):
@@ -30,7 +31,15 @@ class Movie(models.Model):
     image_feature_cover = models.FileField(upload_to='images/', default='images/default_image.png')
     video = models.FileField(upload_to='movie/', default='movie/The_Internship_Official_Trailer_2_2013_-_Vince_Vaughn_Owen_Wilson_Comedy_HD_TC2M1y7.mp4')
 
-
-
     def __str__(self):
         return self.title
+    
+
+class MyMovies(models.Model):
+    user_movies = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+    )
+
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    
