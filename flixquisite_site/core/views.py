@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'index.html', get_movies)
 
 # Restrict view to logged in users
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def movie(request, pk):
     movie_uu_id = pk
     movie_attributes = Movie.objects.get(uu_id=movie_uu_id)
@@ -40,6 +40,11 @@ def login(request):
         return redirect('login')
     
     return render(request, 'login.html')
+
+@login_required(login_url='login')
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
 
 def signup(request):
     if request.method == 'POST':
@@ -74,6 +79,13 @@ def signup(request):
             return redirect('/')
     
     return render(request, 'signup.html')
+
+
+def my_movies(request):
+    pass
+
+def add_to_my_movies(request):
+    pass
 
 
 
