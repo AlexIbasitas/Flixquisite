@@ -74,10 +74,23 @@ WSGI_APPLICATION = 'flixquisite_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Default SQLITE DB
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Add Postgres DB
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database',
+        'USER': 'fl0user',
+        'PASSWORD': 'XDJqKHflm40i',
+        'HOST': 'ep-dawn-flower-a58d9s9s.us-east-2.aws.neon.fl0.io',
+        'PORT': '5432',
     }
 }
 
