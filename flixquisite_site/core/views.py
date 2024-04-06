@@ -19,7 +19,7 @@ def signup(request):
         username = request.POST['username']
         password = request.POST['password']
         repeat_password = request.POST['repeat_password']
-
+        
         # Check user has correctly inputted both passswords
         if password != repeat_password:
             # send message back to signup.html
@@ -33,6 +33,8 @@ def signup(request):
             messages.info(request, 'Email has already been used.')
             # send user back to the signup page
             return redirect('signup')
+
+
 
         return
     
