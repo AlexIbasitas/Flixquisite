@@ -4,11 +4,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
 from .models import Movie
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    movies = Movie.objects.all()
+    get_movies = {'movies': movies}
+    return render(request, 'index.html', get_movies)
 
 def login(request):
     if request.method == 'POST':
@@ -60,4 +63,7 @@ def signup(request):
             return redirect('/')
     
     return render(request, 'signup.html')
+
+def movies(request):
+    pass
 

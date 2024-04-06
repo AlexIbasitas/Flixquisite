@@ -66,23 +66,37 @@
             </div>
         </div>
     </section>
+
+    <section class="py-10 px-5">
+        <h2 class="text-xl mb-5">Flixquisite Picks</h2>
+        <div class="flex space-x-5 overflow-x-auto">
+
+            {% for movie in movies %}
+            <div class="w-40 h-64 flex-shrink-0 film-card" 
+                onclick="showModal(this)"
+                movie-title="{{ movie.title }}"
+                movie-description="{{ movie.description }}"
+                movie-genre="{{ movie.genre }}"  
+                movie-release-date="{{ movie.date }}"
+                movie-length="{{ movie.length }}"
+                movie-image-carousel-card-url="{{ movie.image_carousel_card.url }}"
+                movie-image-feature-cover-url="{{ movie.image_feature_cover.url }}"
+                movie-video-url="/playback/{{ movie.uu_id }}"
+                style="background-image: url('{{ movie.image_carousel_card.url }}'); background-size: cover; background-position: center;">
+            </div>
+
+            {% endfor %}
+    </section>
+    <!-- <div class="w-40 h-64 flex-shrink-0 film-card" onclick="showModal()", style="background-image: url(''); background-size: cover; background-position: center;"></div> -->
+    
+
     <section class="py-10 px-5">
     
         <h2 class="text-xl mb-5">Popular on Netflix</h2>
         <div class="flex space-x-5 overflow-x-auto">
 
             {% for movie in movies %}
-            <div class="w-40 h-64 flex-shrink-0 film-card"
-                onclick="showModal(this)" 
-                data-title="{{ movie.title }}"
-                data-description="{{ movie.description }}"
-                data-release-date="{{ movie.release_date|date:'Y' }}"
-                data-genre="{{ movie.get_genre_display }}" 
-                data-length="{{ movie.length }}"
-                data-image-card-url="{{ movie.image_card.url }}"
-                data-image-cover-url="{{ movie.image_cover.url }}"
-                data-video-url="/movie/{{ movie.uu_id }}"
-                style="background-image: url('{{movie.image_card.url}}'); background-size: cover; background-position: center;">
+            <div class="w-40 h-64 flex-shrink-0 film-card">
             </div>
             {% endfor %}
     </section>
@@ -117,14 +131,14 @@
     <script>
         function showModal(element) {
             // Retrieve data attributes
-            const title = element.getAttribute('data-title');
-            const description = element.getAttribute('data-description');
-            const releaseDate = element.getAttribute('data-release-date');
-            const genre = element.getAttribute('data-genre');
-            const length = element.getAttribute('data-length');
-            const imageCardUrl = element.getAttribute('data-image-card-url');
-            const imageCoverUrl = element.getAttribute('data-image-cover-url');
-            const dataVideoUrl = element.getAttribute('data-video-url');
+            const title = element.getAttribute('movie-title');
+            const description = element.getAttribute('movie-description');
+            const releaseDate = element.getAttribute('movie-release-date');
+            const genre = element.getAttribute('movie-genre');
+            const length = element.getAttribute('movie-length');
+            const imageCardUrl = element.getAttribute('movie-image-carousel-card-url');
+            const imageCoverUrl = element.getAttribute('movie-image-feature-cover-url');
+            const dataVideoUrl = element.getAttribute('movie-video-url');
         
             // Update the modal's content with the movie details
             const modal = document.getElementById('movieModal');
