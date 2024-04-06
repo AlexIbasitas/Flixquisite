@@ -26,7 +26,7 @@ class Movie(models.Model):
 
         image_carousel_card = models.ImageField(upload_to='movie_images/')
         image_feature_cover = models.FileField(upload_to='movie_images/')
-        playback = models.FileField(upload_to='movie_videos/')
+        playback = models.FileField(upload_to='movie_playback/')
 
     def __str__(self):
         return self.title
