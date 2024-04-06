@@ -10,6 +10,20 @@ def index(request):
     return render(request, 'index.html')
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        auth_user = auth.authenticate(username=username, password=password)
+
+        # Check existence for the user in the DB
+        if auth_user:
+            auth.login(request, auth_user)
+            return redirect('/')
+        
+        messages.info(request, 'Invalid credentials')
+        return redirect('login')
+    
     return render(request, 'login.html')
 
 def signup(request):
