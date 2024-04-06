@@ -17,10 +17,12 @@ def index(request):
 def movie(request, pk):
     movie_uu_id = pk
     movie_attributes = Movie.objects.get(uu_id=movie_uu_id)
-    print('movie function hit')
-    print(movie_attributes)
+
     attributes = {'movie_attributes' : movie_attributes}
+    print("Getting Movie")
+    
     return render(request, 'movie.html', attributes)
+
 
 def login(request):
     if request.method == 'POST':

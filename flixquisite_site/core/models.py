@@ -28,7 +28,7 @@ class Movie(models.Model):
 
     image_carousel_card = models.ImageField(upload_to='images/', default='images/default_image.png')
     image_feature_cover = models.FileField(upload_to='images/', default='images/default_image.png')
-    video = models.FileField(upload_to='movie/', default='images/default_image.png')
+    video = models.FileField(upload_to='movie/', default='movie/The_Internship_Official_Trailer_2_2013_-_Vince_Vaughn_Owen_Wilson_Comedy_HD_TC2M1y7.mp4')
 
 
 

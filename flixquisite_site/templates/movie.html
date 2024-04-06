@@ -39,15 +39,15 @@
 
         <div class="mt-8">
             <video class="w-full h-auto" controls>
-                <source src="{{ movie_attributes.video.url }}" type="video/mp4">
-                Your browser does not support the video tag.
+                <source src="{{ movie_attributes.uu_id }}" type="video/mp4">
+                Browser does not support this type of video
             </video>
         </div>
 
 
         <!-- Movie Description -->
         <div class="mt-6">
-            <h3 class="text-xl font-semibold mb-2">About the Movie</h3>
+            <h3 class="text-xl font-semibold mb-2">Synopsis</h3>
             <p>
                 {{ movie_attributes.description }}
             </p>
