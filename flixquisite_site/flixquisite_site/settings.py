@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'flixquisite_site.wsgi.application'
 #     }
 # }
 
-# Add Postgres DB
+# Add Postgres DB and make unapplied migrations
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
