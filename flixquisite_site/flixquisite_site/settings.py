@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'flixquisite_site.wsgi.application'B
+WSGI_APPLICATION = 'flixquisite_site.wsgi.application'
 
 
 # Database
