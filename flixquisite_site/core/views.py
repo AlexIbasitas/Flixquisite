@@ -85,7 +85,10 @@ def signup(request):
 
 @login_required(login_url='login')
 def my_movies(request):
-    movie_attributes = {}
+    # Get all movies from the user's movie list
+    movie_list = MyMovies.objects.filter(user=request.user)
+    user_movie_list = [movie.movie for movie in movie_list]
+    movie_attributes = {'movies' : user_movie_list}
     return render(request, 'my_movies.html', movie_attributes)
 
 @login_required(login_url='login')
@@ -118,5 +121,22 @@ def add_to_my_movies(request):
     return JsonResponse(response, status=400)
 
 
+@login_required(login_url='login')
+def search(request):
+    if request.method == 'POST':
+        search_term = request.POST['search_term']
+
+        # Filter all objects in movies that contain the search term in its title
+        movies = Movie.objects.filter(title__icontains=search_term)
+
+        movie_attributes = {
+            'movies' : movies,
+            'search_term': search_term,
+        }
+
+        return render(request, 'search.html', movie_attributes)
+    
+    return redirect('/')
+    
 
 
