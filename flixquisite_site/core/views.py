@@ -103,9 +103,17 @@ def add_to_my_movies(request):
         # If user has already added movie to My Movies, then tell user that movie is already in list
         # If movie is not in My Movies, add to My Movies and let user know it has been added.
         movie_list, created = MyMovies.objects.get_or_create(user=request.user, movie=movie)
-
-
+        
+        if created:
+            response = {'status' : 'success', 'message': 'Added to My Movies'}
+        else:
+            response = {'status' : 'added', 'message': 'Movie already in My Movies'}
+        
+        return JsonResponse(response)
+    
     # Error
+    response = {'status' : 'error', 'message': 'Invalid Request'}
+    return JsonResponse(response, status=400)
 
 
 
