@@ -50,7 +50,7 @@
                 <button class="bg-red-600 text-white p-2 rounded hover:bg-red-500">Search</button>
             </form>
             <div class="relative">
-                <a href="#" class="block p-2">Welcome, {{user.username}}</a>
+                <a href="#" class="block p-2">Welcome, {{ user.username }}</a>
                 <a href="/logout" class="block p-2">Logout</a>
             </div>
         </div>
@@ -59,7 +59,7 @@
     <hr>
     <div align='center'>
         <h2 class="text-xl mb-5" style="padding-top: 20px">
-            Search Results
+            Search Results for "{{ search_term }}"
         </h2>
     </div>
 

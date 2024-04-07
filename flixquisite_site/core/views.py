@@ -138,5 +138,9 @@ def search(request):
     
     return redirect('/')
     
-
+@login_required(login_url='login')
+def genre(request, pk):
+    movie_genre = pk
+    movies = Movie.objects.filter(genre=movie_genre)
+    return render(request, 'genre.html')
 
