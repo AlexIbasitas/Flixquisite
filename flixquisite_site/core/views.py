@@ -3,8 +3,11 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .models import Movie
+from .models import Movie, MyMovies
 from django.contrib.auth.decorators import login_required
+import re
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 @login_required(login_url='login')
 def index(request):
@@ -85,7 +88,24 @@ def my_movies(request):
     pass
 
 def add_to_my_movies(request):
-    pass
+    if request.method == 'POST':
+        # Get id
+        movie_url_id = request.POST.get('movie_id')
+        
+        # Extract uuid pattern via regex
+        uuid_regex = r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+        match = re.search(uuid_regex, movie_url_id)
+        movie_id = match.group() if match else None
+        
+        # Look for id same as uuid
+        movie = get_object_or_404(Movie, uu_id=movie_id)
+
+        # If user has already added movie to My Movies, then tell user that movie is already in list
+        # If movie is not in My Movies, add to My Movies and let user know it has been added.
+        movie_list, created = MyMovies.objects.get_or_create(user=request.user, movie=movie)
+
+
+    # Error
 
 
 

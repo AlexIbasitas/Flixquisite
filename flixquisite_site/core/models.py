@@ -36,10 +36,9 @@ class Movie(models.Model):
     
 
 class MyMovies(models.Model):
-    user_movies = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE,
     )
 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    

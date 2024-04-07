@@ -175,28 +175,24 @@
 
         function addItemToMyMovies() {
             const modal = document.getElementById('movieModal')
-            var movie_id = modal.querySelector('.modal-content a').href;
+            var movieID = modal.querySelector('.modal-content a').href;
 
             // Submit form without refreshing page
             $.ajax({
-                url: "{% url 'add-to-list' %}",
+                url: "{% url 'add-to-my-movies' %}",
                 type: "POST",
                 data: {
                     movie_id: movieID,
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(data) {
-                    $('#addToListButton').text(data.message);
-
-
-                    $('#addToListButton').prop('disabled', true);
-
-
-                    console.log("Item added to list!");
+                    $('#addToMyMoviesButton').text(data.message);
+                    $('#addToMyMoviesButton').prop('disabled', true);
+                    console.log("Item added to My Movies!");
                 },
                 error: function(xhr, errmsg, err) {
                    
-                    console.error("Error adding item to list: " + errmsg);
+                    console.error("Error adding item to My Movies: " + errmsg);
                 }
             });
         }
