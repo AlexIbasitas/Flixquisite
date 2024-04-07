@@ -12,7 +12,13 @@ from django.shortcuts import get_object_or_404
 @login_required(login_url='login')
 def index(request):
     movies = Movie.objects.all()
-    get_movies = {'movies': movies}
+
+    featured_movie = movies[len(movies)-1]
+
+    get_movies = {
+        'movies': movies,
+        'featured_movie': featured_movie,
+    }
     return render(request, 'index.html', get_movies)
 
 # Restrict view to logged in users
