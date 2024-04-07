@@ -83,10 +83,12 @@ def signup(request):
     
     return render(request, 'signup.html')
 
-
+@login_required(login_url='login')
 def my_movies(request):
-    pass
+    movie_attributes = {}
+    return render(request, 'my_movies.html', movie_attributes)
 
+@login_required(login_url='login')
 def add_to_my_movies(request):
     if request.method == 'POST':
         # Get id
@@ -102,7 +104,7 @@ def add_to_my_movies(request):
 
         # If user has already added movie to My Movies, then tell user that movie is already in list
         # If movie is not in My Movies, add to My Movies and let user know it has been added.
-        movie_list, created = MyMovies.objects.get_or_create(user=request.user, movie=movie)
+        _, created = MyMovies.objects.get_or_create(user=request.user, movie=movie)
         
         if created:
             response = {'status' : 'success', 'message': 'Added to My Movies'}

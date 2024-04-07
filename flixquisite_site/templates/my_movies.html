@@ -1,3 +1,4 @@
+<!-- Load all Static Files With Auto Django -->
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone</title>
+    <title>Flixquisite</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,19 +24,22 @@
             
             <div class="dropdown">
                 <span id="dropdownMenuButton" class="cursor-pointer">Genres ▼</span>
-                
                 <div id="dropdownMenu" class="dropdown-content hidden">
                     <ul><a href="/genre/action/">Action</a></ul>
-                    <ul><a href="/genre/comedy/">Comedy</a></ul>
-                    <ul><a href="/genre/drama/">Drama</a></ul>
+                    <ul><a href="/genre/adventure/">Adventure</a></ul>
                     <ul><a href="/genre/horror/">Horror</a></ul>
                     <ul><a href="/genre/romance/">Romance</a></ul>
-                    <ul><a href="/genre/sciencefiction/">Science Fiction</a></ul>
+                    <ul><a href="/genre/science_fiction/">Science Fiction</a></ul>
+                    <ul><a href="/genre/thriller/">Thriller</a></ul>
                     <ul><a href="/genre/fantasy/">Fantasy</a></ul>
+                    <ul><a href="/genre/animation/">Animation</a></ul>
+                    <ul><a href="/genre/documentary/">Documentary</a></ul>
+                    <ul><a href="/genre/mystery/">Mystery</a></ul>
+                    <ul><a href="/genre/comedy/">Comedy</a></ul>
                 </div>
             </div>
 
-            <span><a href="/my-list">My List</a></span>
+            <span><a href="/my-list">My Movies</a></span>
         </nav>
 
 
@@ -51,35 +55,30 @@
             </div>
         </div>
     </header>
-    
-    <hr>
+
 
     <section class="py-10 px-5">
-    
-        <div align="center">
-            <h2 class="text-xl mb-5">
-                My List
-            </h2>
-        </div>
+        <h2 class="text-xl mb-5">My Movies</h2>
         <div class="flex space-x-5 overflow-x-auto">
 
-            {% for movie in movies reversed %}
-            <div class="w-40 h-64 flex-shrink-0 film-card"
-                onclick="showModal(this)" 
-                data-title="{{ movie.title }}"
-                data-description="{{ movie.description }}"
-                data-release-date="{{ movie.release_date|date:'Y' }}"
-                data-genre="{{ movie.get_genre_display }}" 
-                data-length="{{ movie.length }}"
-                data-image-card-url="{{ movie.image_card.url }}"
-                data-image-cover-url="{{ movie.image_cover.url }}"
-                data-video-url="/movie/{{ movie.uu_id }}"
-                style="background-image: url('{{movie.image_card.url}}'); background-size: cover; background-position: center;">
+            {% for movie in movies %}
+            <div class="w-40 h-64 flex-shrink-0 film-card" 
+                onclick="showModal(this)"
+                movie-title="{{ movie.title }}"
+                movie-description="{{ movie.description }}"
+                movie-genre="{{ movie.genre }}"  
+                movie-release-date="{{ movie.date }}"
+                movie-length="{{ movie.length }}"
+                movie-image-carousel-card-url="{{ movie.image_carousel_card.url }}"
+                movie-image-feature-cover-url="{{ movie.image_feature_cover.url }}"
+                movie-video-url="/movie/{{ movie.uu_id }}"
+                style="background-image: url('{{ movie.image_carousel_card.url }}'); background-size: cover; background-position: center;">
             </div>
+
             {% endfor %}
     </section>
     
-   
+    
 
     <!-- Modal -->
     <div class="modal" id="movieModal">
@@ -98,24 +97,25 @@
                 <a href="movie.html">
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
                 </a>
-                <button id="addToListButton" onclick="addItemToList()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
-                    Add to List
+                <button id="addToMyMoviesButton" onclick="addItemToMyMovies()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
+                    Add to My Movies
                 </button>
             </div>
+            
         </div>
     </div>
 
     <script>
         function showModal(element) {
             // Retrieve data attributes
-            const title = element.getAttribute('data-title');
-            const description = element.getAttribute('data-description');
-            const releaseDate = element.getAttribute('data-release-date');
-            const genre = element.getAttribute('data-genre');
-            const length = element.getAttribute('data-length');
-            const imageCardUrl = element.getAttribute('data-image-card-url');
-            const imageCoverUrl = element.getAttribute('data-image-cover-url');
-            const dataVideoUrl = element.getAttribute('data-video-url');
+            const title = element.getAttribute('movie-title');
+            const description = element.getAttribute('movie-description');
+            const releaseDate = element.getAttribute('movie-release-date');
+            const genre = element.getAttribute('movie-genre');
+            const length = element.getAttribute('movie-length');
+            const imageCardUrl = element.getAttribute('movie-image-carousel-card-url');
+            const imageCoverUrl = element.getAttribute('movie-image-feature-cover-url');
+            const dataVideoUrl = element.getAttribute('movie-video-url');
         
             // Update the modal's content with the movie details
             const modal = document.getElementById('movieModal');
@@ -150,30 +150,32 @@
             }
         }
 
-        function addItemToList() {
+        function addItemToMyMovies() {
+            console.log('hit')
             const modal = document.getElementById('movieModal')
             var movieID = modal.querySelector('.modal-content a').href;
 
+            // Submit form without refreshing page
             $.ajax({
-                url: "{% url 'add-to-list' %}",
+                url: "{% url 'add-to-my-movies' %}",
                 type: "POST",
                 data: {
                     movie_id: movieID,
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(data) {
-                    $('#addToListButton').text(data.message);
-
-                    $('#addToListButton').prop('disabled', true);
-
-                    console.log("Item added to list!");
+                    $('#addToMyMoviesButton').text(data.message);
+                    $('#addToMyMoviesButton').prop('disabled', true);
+                    console.log("Item added to My Movies!");
                 },
                 error: function(xhr, errmsg, err) {
-                    
-                    console.error("Error adding item to list: " + errmsg);
+                   
+                    console.error("Error adding item to My Movies: " + errmsg);
                 }
             });
         }
+
+
     </script>
 </body>
 

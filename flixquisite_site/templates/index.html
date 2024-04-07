@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone</title>
+    <title>Flixquisite</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -87,20 +87,7 @@
 
             {% endfor %}
     </section>
-    <!-- <div class="w-40 h-64 flex-shrink-0 film-card" onclick="showModal()", style="background-image: url(''); background-size: cover; background-position: center;"></div> -->
-    
 
-    <section class="py-10 px-5">
-    
-        <h2 class="text-xl mb-5">Popular on Netflix</h2>
-        <div class="flex space-x-5 overflow-x-auto">
-
-            {% for movie in movies %}
-            <div class="w-40 h-64 flex-shrink-0 film-card">
-            </div>
-            {% endfor %}
-    </section>
-    
     
 
     <!-- Modal -->
@@ -174,6 +161,7 @@
         }
 
         function addItemToMyMovies() {
+            console.log('hit')
             const modal = document.getElementById('movieModal')
             var movieID = modal.querySelector('.modal-content a').href;
 
