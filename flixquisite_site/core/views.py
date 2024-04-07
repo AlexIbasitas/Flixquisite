@@ -142,5 +142,11 @@ def search(request):
 def genre(request, pk):
     movie_genre = pk
     movies = Movie.objects.filter(genre=movie_genre)
-    return render(request, 'genre.html')
+
+    movie_attributes = {
+        'movies': movies,
+        'movie_genre': movie_genre,
+    }
+
+    return render(request, 'genre.html', movie_attributes)
 
