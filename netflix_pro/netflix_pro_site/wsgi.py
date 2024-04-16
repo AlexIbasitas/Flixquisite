@@ -1,5 +1,5 @@
 """
-WSGI config for flixquisite_site project.
+WSGI config for netflix_pro_site project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flixquisite_site.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'netflix_pro_site.settings')
 
 application = get_wsgi_application()
