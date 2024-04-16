@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('core.urls')),
 ]
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Added + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
