@@ -25,9 +25,9 @@ def index(request):
 @login_required(login_url='login')
 def movie(request, pk):
     movie_uu_id = pk
-    movie_attributes = Movie.objects.get(uu_id=movie_uu_id)
+    movie_details = Movie.objects.get(uu_id=movie_uu_id)
 
-    attributes = {'movie_attributes' : movie_attributes}
+    attributes = {'movie_details' : movie_details}
     print("Getting Movie")
     
     return render(request, 'movie.html', attributes)

@@ -11,5 +11,4 @@ urlpatterns = [
     path('my-movies', views.my_movies, name='my-movies'),
     path('add-to-my-movies', views.add_to_my_movies, name='add-to-my-movies'),
     path('search', views.search, name='search'),
-
 ]

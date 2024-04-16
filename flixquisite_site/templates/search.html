@@ -16,31 +16,32 @@
 
 <body class="text-white" style="background-color: #141414;">
     <header class="p-5 flex justify-between items-center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110">
-        
-        
-        <nav class="flex space-x-5">
-            <span><a href="/">Home</a></span>
+        <div class="flex items-center space-x-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110" class="mr-3">
             
-            <div class="dropdown">
-                <span id="dropdownMenuButton" class="cursor-pointer">Genres ▼</span>
-                <div id="dropdownMenu" class="dropdown-content hidden">
-                    <ul><a href="/genre/action/">Action</a></ul>
-                    <ul><a href="/genre/adventure/">Adventure</a></ul>
-                    <ul><a href="/genre/horror/">Horror</a></ul>
-                    <ul><a href="/genre/romance/">Romance</a></ul>
-                    <ul><a href="/genre/science_fiction/">Science Fiction</a></ul>
-                    <ul><a href="/genre/thriller/">Thriller</a></ul>
-                    <ul><a href="/genre/fantasy/">Fantasy</a></ul>
-                    <ul><a href="/genre/animation/">Animation</a></ul>
-                    <ul><a href="/genre/documentary/">Documentary</a></ul>
-                    <ul><a href="/genre/mystery/">Mystery</a></ul>
-                    <ul><a href="/genre/comedy/">Comedy</a></ul>
+            <nav class="flex space-x-5">
+                <span><a href="/" class="mr-3">Home</a></span>
+                
+                <div class="dropdown">
+                    <span id="dropdownMenuButton" class="cursor-pointer">Genres ▼</span>
+                    <div id="dropdownMenu" class="dropdown-content hidden">
+                        <ul><a href="/genre/action/">Action</a></ul>
+                        <ul><a href="/genre/adventure/">Adventure</a></ul>
+                        <ul><a href="/genre/horror/">Horror</a></ul>
+                        <ul><a href="/genre/romance/">Romance</a></ul>
+                        <ul><a href="/genre/science_fiction/">Science Fiction</a></ul>
+                        <ul><a href="/genre/thriller/">Thriller</a></ul>
+                        <ul><a href="/genre/fantasy/">Fantasy</a></ul>
+                        <ul><a href="/genre/animation/">Animation</a></ul>
+                        <ul><a href="/genre/documentary/">Documentary</a></ul>
+                        <ul><a href="/genre/mystery/">Mystery</a></ul>
+                        <ul><a href="/genre/comedy/">Comedy</a></ul>
+                    </div>
                 </div>
-            </div>
 
-            <span><a href="/my-list">My Movies</a></span>
-        </nav>
+                <span><a href="/my-movies">My Movies</a></span>
+            </nav>
+        </div>
 
 
         <div class="flex space-x-5 items-center">
@@ -50,7 +51,7 @@
                 <button class="bg-red-600 text-white p-2 rounded hover:bg-red-500">Search</button>
             </form>
             <div class="relative">
-                <a href="#" class="block p-2">Welcome, {{ user.username }}</a>
+                <a href="#" class="block p-2">Welcome, {{user.username}}</a>
                 <a href="/logout" class="block p-2">Logout</a>
             </div>
         </div>
@@ -91,12 +92,12 @@
                 <h2 class="text-xl mb-5">Movie Title</h2>
                 <button onclick="hideModal()">X</button>
             </div>
-            <img width="1000" height="100" src="https://bloximages.newyork1.vip.townnews.com/newsrecord.org/content/tncms/assets/v3/editorial/8/1e/81ea500c-45ac-11ee-a11e-a7402910a7e7/64ecaae69243a.image.jpg" alt="Movie Image" class=" mb-5">
+            <img width="1000" height="100" src="https://w0.peakpx.com/wallpaper/16/546/HD-wallpaper-monkey-luffy-gear-5-art-one-piece.jpg" alt="Movie Image" class="mb-5">
             <div class="flex justify-between mb-5">
-                <span>Year: 2023</span>
-                <span>Length: 2h 15min</span>
+                <span>Release Date:</span>
+                <span>Length: </span>
             </div>
-            <p class="mb-5">Detailed information about the movie.</p>
+            <p class="mb-5">Movie Description</p>
             <div class="flex space-x-4 mb-5">
                 <a href="movie.html">
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
@@ -105,7 +106,6 @@
                     Add to My Movies
                 </button>
             </div>
-            
         </div>
     </div>
 
@@ -168,8 +168,8 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(data) {
-                    $('#addToMyMoviesButton').text(data.message);
-                    $('#addToMyMoviesButton').prop('disabled', true);
+                    // $('#addToMyMoviesButton').text(data.message);
+                    // $('#addToMyMoviesButton').prop('disabled', true);
                     console.log("Item added to My Movies!");
                 },
                 error: function(xhr, errmsg, err) {

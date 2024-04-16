@@ -21,15 +21,15 @@ class Movie(models.Model):
 
     uu_id = models.UUIDField(default=uuid.uuid4)
 
-    title = models.CharField(max_length=255, default='No title')
+    # title = models.CharField(max_length=255, default='No title')
+    title = models.CharField(max_length=255)
     description = models.TextField(default='No description available.')
     date = models.DateField(("Date"), default=datetime.date.today)
     genre = models.CharField(max_length=50, default='No genre available', choices=GENRES)
     length = models.PositiveBigIntegerField(default=0)
-
     image_carousel_card = models.ImageField(upload_to='images/', default='images/default_image.png')
     image_feature_cover = models.FileField(upload_to='images/', default='images/default_image.png')
-    video = models.FileField(upload_to='movie/', default='movie/The_Internship_Official_Trailer_2_2013_-_Vince_Vaughn_Owen_Wilson_Comedy_HD_TC2M1y7.mp4')
+    video = models.FileField(upload_to='movie/', default='movie/65aaa30f-af07-4968-a1b0-c107bc902b90.mp4')
 
     def __str__(self):
         return self.title
