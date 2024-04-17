@@ -87,3 +87,13 @@ body, html {
 .signup-container .help-text a:hover {
     text-decoration: underline;
 }
+
+
+
+.social-login {
+    margin-top: 1000px; 
+}
+
+.social-login img {
+    max-width: 100%; 
+}

@@ -88,8 +88,12 @@ body, html {
     text-decoration: underline;
 }
 
-.google-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+
+.social-login {
+    margin-top: 1000px; 
+}
+
+.social-login img {
+    max-width: 100%; 
 }
