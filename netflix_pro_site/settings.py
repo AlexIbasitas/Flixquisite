@@ -165,7 +165,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Google & Facebook Sign in Custom Settings
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 
 
@@ -179,8 +179,5 @@ LOGOUT_REDIRECT_URL = 'login'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1014222072695-vnnfv4ijkb3mvt0rhcrkb5r3gi0i05ik.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '733689515605219'
-SOCIAL_AUTH_FACEBOOK_SECRET = '7200c45ce588633d8785430b95a5bd3d'
-SOCIAL_AUTH_FACEBOOK_SCOPE = [
-    'email',
-]
+SOCIAL_AUTH_GITHUB_KEY = '1e6d44c6688262896cf2'
+SOCIAL_AUTH_GITHUB_SECRET = '3cfb81e35a083e3d1682826f50bcaf7932809afc'
