@@ -87,3 +87,9 @@ body, html {
 .signup-container .help-text a:hover {
     text-decoration: underline;
 }
+
+.google-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
