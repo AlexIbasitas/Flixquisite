@@ -42,12 +42,17 @@
                 <span>Dont have an account? <a href="/signup">Signup</a></span>
             </div>
 
-            <div class="social-login" style="text-align: center; margin-top: 20px; display: flex; justify-content: center;">
+            <!-- <div class="social-login" style="text-align: center; margin-top: 20px; display: flex; justify-content: center;">
                 <a href="{% url 'social:begin' 'google-oauth2' %}" style="margin-right: 20px;">
                     <img src="{% static 'google_signin.png' %}" alt="Google Sign in" style="max-width: 100%;" />
                 </a>
-                <a href="{% url 'social:begin' 'google-oauth2' %}">
+                <a href="{% url 'social:begin' 'facebook' %}">
                     <img src="{% static 'facebook_signin.png' %}" alt="Facebook Sign in" style="max-width: 100%;" />
+                </a>
+            </div> -->
+            <div class="social-login" style="text-align: center; margin-top: 20px; display: flex; justify-content: center;">
+                <a href="{% url 'social:begin' 'google-oauth2' %}">
+                    <img src="{% static 'google_signin.png' %}" alt="Google Sign in" style="max-width: 100%;" />
                 </a>
             </div>
         </div>
