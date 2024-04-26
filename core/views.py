@@ -126,6 +126,35 @@ def add_to_my_movies(request):
     response = {'status' : 'error', 'message': 'Invalid Request'}
     return JsonResponse(response, status=400)
 
+@login_required(login_url='login')
+def remove_from_my_movies(request):
+    if request.method == 'POST':
+        # Get movie id
+        movie_url_id = request.POST.get('movie_id')
+        
+        # Extract uuid pattern via regex
+        uuid_regex = r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+        match = re.search(uuid_regex, movie_url_id)
+        movie_id = match.group() if match else None
+        
+        # Look for movie with given ID
+        movie = get_object_or_404(Movie, uu_id=movie_id)
+        
+        # Try to delete the movie from user's "My Movies" list
+        try:
+            my_movie = MyMovies.objects.get(user=request.user, movie=movie)
+            my_movie.delete()
+            response = {'status': 'success', 'message': 'Removed from My Movies'}
+        except MyMovies.DoesNotExist:
+            response = {'status': 'not_found', 'message': 'Movie not found in My Movies'}
+        
+        return JsonResponse(response)
+    
+    # Error
+    response = {'status': 'error', 'message': 'Invalid Request'}
+    return JsonResponse(response, status=400)
+
+
 
 @login_required(login_url='login')
 def search(request):

@@ -102,8 +102,8 @@
                 <a href="movie.html">
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
                 </a>
-                <button id="addToMyMoviesButton" onclick="addItemToMyMovies()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
-                    Add to My Movies
+                <button id="addToMyMoviesButton" onclick="removeItemFromMyMovies()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
+                    Remove from My Movies
                 </button>
             </div>
         </div>
@@ -174,6 +174,29 @@
                 error: function(xhr, errmsg, err) {
                    
                     console.error("Error adding item to My Movies: " + errmsg);
+                }
+            });
+        }
+
+        function removeItemFromMyMovies() {
+            const modal = document.getElementById('movieModal');
+            var movieID = modal.querySelector('.modal-content a').href;
+
+            $.ajax({
+                url: "{% url 'remove-from-my-movies' %}",  
+                type: "POST",
+                data: {
+                    movie_id: movieID,
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(data) {
+                    // Handle success response if needed
+                    console.log("Item removed from My Movies!");
+                    location.reload();
+                },
+                error: function(xhr, errmsg, err) {
+                    // Handle error response if needed
+                    console.error("Error removing item from My Movies: " + errmsg);
                 }
             });
         }
