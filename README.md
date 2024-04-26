@@ -6,5 +6,5 @@
 - [x] Fix "remove from my movies" button in my_movies
 - [ ] Expand featured movie height and add info button to movie modal
 - [ ] Arrow Scroll
-- [ ] Center Image in movie modal
+- [x] Center Image in movie modal
 - [ ] IMDB / Rotten Tomatoes Ratings
