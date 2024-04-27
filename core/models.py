@@ -42,3 +42,11 @@ class MyMovies(models.Model):
     )
 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+
+class CO2(models.Model):
+    date = models.DateField()
+    average = models.FloatField()
+
+    class Meta:
+        ordering = ('date',)
