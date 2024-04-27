@@ -8,3 +8,6 @@
 - [ ] Arrow Scroll
 - [x] Center Image in movie modal
 - [ ] IMDB / Rotten Tomatoes Ratings
+
+
+Request/Download NetflixViewingHistory.csv @ https://www.netflix.com/settings/viewing-history
