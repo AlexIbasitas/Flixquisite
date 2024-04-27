@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'netflix_pro_site.urls'
@@ -184,4 +185,6 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '7200c45ce588633d8785430b95a5bd3d'
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
     'email',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
 
