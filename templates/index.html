@@ -12,13 +12,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover, .dropdown:hover {
+            color: grey;
+        }
+    </style>
+
 </head>
 
 <body class="text-white" style="background-color: #141414;">
     <header class="p-5 flex justify-between items-center">
         <div class="flex items-center space-x-5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110" class="mr-3">
-            
+            <a href="/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110" class="mr-3">
+            </a>
             <nav class="flex space-x-5">
                 <span><a href="/" class="mr-3">Home</a></span>
                 
@@ -61,11 +76,17 @@
     <section class="relative py-20 px-10" style="background-image: url('{{featured_movie.image_feature_cover.url}}'); background-size: cover; background-position: center;">
         <div>
             <h1 style="color: white;" class="text-5xl mb-5">{{ featured_movie.title }}</h1>
-            <p style="color: white;" class="mb-5">{{ featured_movie.description }}</p>
+            <p style="color: white;" class="mb-5">{{ featured_movie.description }}</p> 
             <div class="flex space-x-4">
                 <a href="/movie/{{featured_movie.uu_id}}">
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
                 </a>
+            
+                <!-- <button class="bg-gray-400 text-gray-800 p-2 px-5 rounded hover:bg-gray-300 flex items-center justify-center" onclick="showModal(this)">
+                    Info
+                </button> -->
+                
+
             </div>
         </div>
     </section>
@@ -98,9 +119,15 @@
         <div class="modal-content">
             <div class="flex justify-between">
                 <h2 class="text-xl mb-5">Movie Title</h2>
-                <button onclick="hideModal()">X</button>
+                <button onclick="hideModal()">❌</button>
+                
             </div>
-            <img width="1000" height="100" src="https://w0.peakpx.com/wallpaper/16/546/HD-wallpaper-monkey-luffy-gear-5-art-one-piece.jpg" alt="Movie Image" class="mb-5">
+
+            <div class="flex justify-center mb-5">
+                <img src="https://w0.peakpx.com/wallpaper/16/546/HD-wallpaper-monkey-luffy-gear-5-art-one-piece.jpg" alt="Movie Image" class="mx-auto">
+            </div>
+
+
             <div class="flex justify-between mb-5">
                 <span>Release Date:</span>
                 <span>Length: </span>
@@ -162,8 +189,31 @@
             }
         }
 
+        // function addItemToMyMovies() {
+        //     const modal = document.getElementById('movieModal')
+        //     var movieID = modal.querySelector('.modal-content a').href;
+
+        //     // Submit form without refreshing page
+        //     $.ajax({
+        //         url: "{% url 'add-to-my-movies' %}",
+        //         type: "POST",
+        //         data: {
+        //             movie_id: movieID,
+        //             csrfmiddlewaretoken: "{{ csrf_token }}"
+        //         },
+        //         success: function(data) {
+        //             $('#addToMyMoviesButton').text(data.message);
+        //             $('#addToMyMoviesButton').prop('disabled', true);
+        //             console.log("Item added to My Movies!");
+        //         },
+        //         error: function(xhr, errmsg, err) {
+                   
+        //             console.error("Error adding item to My Movies: " + errmsg);
+        //         }
+        //     });
+        
         function addItemToMyMovies() {
-            const modal = document.getElementById('movieModal')
+            const modal = document.getElementById('movieModal');
             var movieID = modal.querySelector('.modal-content a').href;
 
             // Submit form without refreshing page
@@ -175,12 +225,17 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(data) {
-                    // $('#addToMyMoviesButton').text(data.message);
-                    // $('#addToMyMoviesButton').prop('disabled', true);
+                    // Display toast notification with the message
+                    if (data.message === "Movie already in My Movies") {
+                        toastr.warning(data.message);
+                    } else {
+                        toastr.success(data.message);
+                    }
+                    // Update button text and disable it
+                    // $('#addToMyMoviesButton').text(data.message).prop('disabled', true);
                     console.log("Item added to My Movies!");
                 },
                 error: function(xhr, errmsg, err) {
-                   
                     console.error("Error adding item to My Movies: " + errmsg);
                 }
             });

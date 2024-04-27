@@ -126,6 +126,9 @@ def add_to_my_movies(request):
     response = {'status' : 'error', 'message': 'Invalid Request'}
     return JsonResponse(response, status=400)
 
+
+
+
 @login_required(login_url='login')
 def remove_from_my_movies(request):
     if request.method == 'POST':

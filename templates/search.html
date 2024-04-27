@@ -12,12 +12,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <style>
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover, .dropdown:hover {
+            color: grey;
+        }
+    </style>
 </head>
 
 <body class="text-white" style="background-color: #141414;">
     <header class="p-5 flex justify-between items-center">
         <div class="flex items-center space-x-5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110" class="mr-3">
+            <a href="/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" height="30" alt="Netflix Logo" width="110" class="mr-3">
+            </a>
             
             <nav class="flex space-x-5">
                 <span><a href="/" class="mr-3">Home</a></span>
@@ -92,7 +108,9 @@
                 <h2 class="text-xl mb-5">Movie Title</h2>
                 <button onclick="hideModal()">X</button>
             </div>
-            <img width="1000" height="100" src="https://w0.peakpx.com/wallpaper/16/546/HD-wallpaper-monkey-luffy-gear-5-art-one-piece.jpg" alt="Movie Image" class="mb-5">
+            <div class="flex justify-center mb-5">
+                <img src="https://w0.peakpx.com/wallpaper/16/546/HD-wallpaper-monkey-luffy-gear-5-art-one-piece.jpg" alt="Movie Image" class="mx-auto">
+            </div>
             <div class="flex justify-between mb-5">
                 <span>Release Date:</span>
                 <span>Length: </span>
@@ -168,8 +186,14 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(data) {
-                    // $('#addToMyMoviesButton').text(data.message);
-                    // $('#addToMyMoviesButton').prop('disabled', true);
+                    // Display toast notification with the message
+                    if (data.message === "Movie already in My Movies") {
+                        toastr.warning(data.message);
+                    } else {
+                        toastr.success(data.message);
+                    }
+                    // Update button text and disable it
+                    // $('#addToMyMoviesButton').text(data.message).prop('disabled', true);
                     console.log("Item added to My Movies!");
                 },
                 error: function(xhr, errmsg, err) {
