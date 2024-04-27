@@ -192,7 +192,9 @@
                     //     movieItemToRemove.remove();
                     // }
                     
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
                 },
                 error: function(xhr, errmsg, err) {
                     // Handle error response if needed
