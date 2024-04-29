@@ -9,6 +9,7 @@ import re
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
+# Restrict view to logged in users
 @login_required(login_url='login')
 def index(request):
     movies = Movie.objects.all()
