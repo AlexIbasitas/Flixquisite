@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "firebase": "^10.11.1"
-  },
   "engines": {
     "node": "18.x"
   }
