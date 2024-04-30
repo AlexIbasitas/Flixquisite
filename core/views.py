@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+import plotly.express as px
+
 
 # Restrict view to logged in users
 @login_required(login_url='login')
@@ -191,9 +193,8 @@ def genre(request, pk):
 
 
 
-import plotly.express as px
 # Create your views here.
-def chart(request):
+def co2_chart(request):
     co2 = CO2.objects.all()
 
     fig = px.line(
@@ -202,7 +203,6 @@ def chart(request):
     )
     chart = fig.to_html()
     context = {'chart':chart}
-    print("sending chart")
-    return render(request, 'chart.html', context)
+    return render(request, 'co2_chart.html', context)
 
 

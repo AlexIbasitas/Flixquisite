@@ -14,5 +14,5 @@ urlpatterns = [
     path('remove-from-my-movies', views.remove_from_my_movies, name='remove-from-my-movies'),
     path('search', views.search, name='search'),
 
-    path('test-chart', views.chart, name='chart')
+    path('co2-chart', views.co2_chart, name='chart')
 ]
