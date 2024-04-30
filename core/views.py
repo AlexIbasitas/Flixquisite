@@ -205,4 +205,8 @@ def co2_chart(request):
     context = {'chart':chart}
     return render(request, 'co2_chart.html', context)
 
+def most_watched_netflix_titles_chart(request):
+    pass
+
+
 
