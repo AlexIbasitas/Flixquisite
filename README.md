@@ -8,6 +8,8 @@
 - [ ] Arrow Scroll
 - [x] Center Image in movie modal
 - [ ] IMDB / Rotten Tomatoes Ratings
+- [ ] Fix DEBUG = True which automatically serves static files, when should be DEBUG = False
+
 
 
 Request/Download NetflixViewingHistory.csv @ https://www.netflix.com/settings/viewing-history
