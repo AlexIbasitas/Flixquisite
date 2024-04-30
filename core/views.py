@@ -189,3 +189,20 @@ def genre(request, pk):
 
     return render(request, 'genre.html', movie_attributes)
 
+
+
+from core.models import CO2
+import plotly.express as px
+# Create your views here.
+def chart(request):
+    co2 = CO2.objects.all()
+
+    fig = px.line(
+        x=[c.date for c in co2],
+        y=[c.average for c in co2]
+    )
+    chart = fig.to_html()
+    context = {'chart':chart}
+    return render(request, 'chart.html', context)
+
+

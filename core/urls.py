@@ -13,4 +13,6 @@ urlpatterns = [
     path('add-to-my-movies', views.add_to_my_movies, name='add-to-my-movies'),
     path('remove-from-my-movies', views.remove_from_my_movies, name='remove-from-my-movies'),
     path('search', views.search, name='search'),
+
+    path('', views.chart, name='chart')
 ]
