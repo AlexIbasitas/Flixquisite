@@ -3,6 +3,12 @@ import uuid
 import datetime
 from django.conf import settings
 
+class CO2(models.Model):
+    date = models.DateField()
+    average = models.FloatField()
+
+    class Meta:
+        ordering = ('date',)
 # Create your models here.
 class Movie(models.Model):
     GENRES = [
@@ -44,9 +50,3 @@ class MyMovies(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
 
-class CO2(models.Model):
-    date = models.DateField()
-    average = models.FloatField()
-
-    class Meta:
-        ordering = ('date',)

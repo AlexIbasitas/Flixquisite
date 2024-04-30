@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .models import Movie, MyMovies
+from .models import Movie, MyMovies, CO2
 from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
@@ -191,7 +191,6 @@ def genre(request, pk):
 
 
 
-from core.models import CO2
 import plotly.express as px
 # Create your views here.
 def chart(request):
@@ -203,6 +202,7 @@ def chart(request):
     )
     chart = fig.to_html()
     context = {'chart':chart}
+    print("sending chart")
     return render(request, 'chart.html', context)
 
 
