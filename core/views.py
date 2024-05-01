@@ -3,12 +3,14 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .models import Movie, MyMovies, CO2
+from .models import Movie, MyMovies, CO2, NetflixMovie
 from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 import plotly.express as px
+import plotly.graph_objs as go
+import pandas as pd
 
 
 # Restrict view to logged in users
@@ -205,8 +207,35 @@ def co2_chart(request):
     context = {'chart':chart}
     return render(request, 'co2_chart.html', context)
 
-def most_watched_netflix_titles_chart(request):
-    pass
+def test_netflix_wrapped(request):
+    netflix_movie_queryset = NetflixMovie.objects.all()
 
+    # Extract data for the first 10 movies
+    titles = []
+    durations = []
 
+    for movie in netflix_movie_queryset[:10]:
+        titles.append(movie.title)
+        durations.append(movie.duration.total_seconds() / 60)  # Convert duration to minutes
 
+    # Create a bar chart
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=titles,
+        y=durations,
+        marker_color='rgb(26, 118, 255)'  # Blue color
+    ))
+
+    # Update layout
+    fig.update_layout(
+        title='Netflix Movie Durations (First 10)',
+        xaxis=dict(title='Title'),
+        yaxis=dict(title='Duration (minutes)'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='white')
+    )
+
+    chart = fig.to_html()
+    context = {'chart':chart}
+    return render(request, 'netflix_movies.html', context)

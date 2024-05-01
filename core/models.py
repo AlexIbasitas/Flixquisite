@@ -64,3 +64,5 @@ class NetflixMovie(models.Model):
     latest_bookmark = models.DurationField()
     country = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ('start_time',)
