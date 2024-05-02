@@ -24,6 +24,14 @@
         a:hover, .dropdown:hover {
             color: grey;
         }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        .film-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
     </style>
 </head>
 
@@ -79,24 +87,29 @@
         </h2>
     </div>
 
-    <!-- <section class="py-10 px-5"> -->
-    <div class="flex space-x-5 overflow-x-auto">
-        {% for movie in movies reversed %}
-        <div class="w-40 h-64 flex-shrink-0 film-card" 
-            onclick="showModal(this)"
-            movie-title="{{ movie.title }}"
-            movie-description="{{ movie.description }}"
-            movie-genre="{{ movie.genre }}"  
-            movie-release-date="{{ movie.date }}"
-            movie-length="{{ movie.length }}"
-            movie-image-carousel-card-url="{{ movie.image_carousel_card.url }}"
-            movie-image-feature-cover-url="{{ movie.image_feature_cover.url }}"
-            movie-video-url="/movie/{{ movie.uu_id }}"
-            style="background-image: url('{{ movie.image_carousel_card.url }}'); background-size: cover; background-position: center;">
-        </div>
 
-        {% endfor %}
-    <!-- </section> -->
+    <section class="py-10 px-5 relative">
+        <!-- Previous Arrow -->
+        <button class="prev-arrow absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 hover:bg-gray-600">‹</button>
+        <div class="film-container flex space-x-5 overflow-x-auto relative">
+            {% for movie in movies %}
+            <div class="w-40 h-64 flex-shrink-0 film-card" 
+                onclick="showModal(this)"
+                movie-title="{{ movie.title }}"
+                movie-description="{{ movie.description }}"
+                movie-genre="{{ movie.genre }}"  
+                movie-release-date="{{ movie.date }}"
+                movie-length="{{ movie.length }}"
+                movie-image-carousel-card-url="{{ movie.image_carousel_card.url }}"
+                movie-image-feature-cover-url="{{ movie.image_feature_cover.url }}"
+                movie-video-url="/movie/{{ movie.uu_id }}"
+                style="background-image: url('{{ movie.image_carousel_card.url }}'); background-size: cover; background-position: center;">
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Next Arrow -->
+        <button class="next-arrow absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 hover:bg-gray-600">›</button>
+    </section>
     
     
 
@@ -203,7 +216,19 @@
             });
         }
 
+        $(document).ready(function() {
+            const filmContainer = $('.film-container');
+            const prevArrow = $('.prev-arrow');
+            const nextArrow = $('.next-arrow');
 
+            prevArrow.on('click', function() {
+                filmContainer.animate({scrollLeft: '-=300'}, 'fast'); // Adjust scroll amount as needed
+            });
+
+            nextArrow.on('click', function() {
+                filmContainer.animate({scrollLeft: '+=300'}, 'fast'); // Adjust scroll amount as needed
+            });
+        });
 
     </script>
 </body>
