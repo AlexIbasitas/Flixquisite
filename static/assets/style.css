@@ -73,3 +73,44 @@ a {
 a:hover {
     color: grey;
 }
+
+
+
+
+
+
+
+.prev-arrow,
+.next-arrow {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev-arrow:hover,
+.next-arrow:hover {
+    background-color: #4a5568;
+}
+
+.film-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.film-card {
+    width: 200px;
+    height: 300px;
+    transition: transform 0.3s ease, border-radius 0.3s ease;
+    border-radius: 4px;
+}
+
+.film-card:hover {
+    transform: scale(1.15);
+    border-radius: 25px;
+}
+
