@@ -83,12 +83,15 @@ a:hover {
 .prev-arrow,
 .next-arrow {
     font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 130px;
     line-height: 40px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 .prev-arrow:hover,
@@ -99,7 +102,9 @@ a:hover {
 .film-container {
     display: flex;
     overflow-x: auto;
-    scroll-behavior: smooth; /* Smooth scrolling */
+    scroll-behavior: smooth; 
+    overflow-y: hidden;
+    position: relative;
 }
 
 .film-card {
@@ -107,10 +112,16 @@ a:hover {
     height: 300px;
     transition: transform 0.3s ease, border-radius 0.3s ease;
     border-radius: 4px;
+    flex-shrink: 0; 
 }
 
 .film-card:hover {
     transform: scale(1.15);
     border-radius: 25px;
 }
+
+
+
+
+
 
