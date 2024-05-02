@@ -80,21 +80,74 @@ a:hover {
 
 
 
-.navigation-arrows {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-}
-
-.prev-arrow, .next-arrow {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 24px;
+.prev-arrow,
+.next-arrow, 
+.prev-arrow-1,
+.prev-arrow-2,
+.prev-arrow-3,
+.prev-arrow-4,
+.prev-arrow-5,
+.next-arrow-1,
+.next-arrow-2,
+.next-arrow-3,
+.next-arrow-4,
+.next-arrow-5{
+    font-size: 1.5rem;
+    width: 20px;
+    height: 130px;
+    line-height: 40px;
+    text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
-.prev-arrow:focus, .next-arrow:focus {
-    outline: none;
+.prev-arrow:hover,
+.next-arrow:hover,
+.prev-arrow-1:hover,
+.prev-arrow-2:hover,
+.prev-arrow-3:hover,
+.prev-arrow-4:hover,
+.prev-arrow-5:hover
+.next-arrow-1:hover,
+.next-arrow-2:hover,
+.next-arrow-3:hover,
+.next-arrow-4:hover,
+.next-arrow-5:hover
+{
+    background-color: #4a5568;
 }
+
+.film-container, 
+.film-container-1, 
+.film-container-2, 
+.film-container-3,
+.film-container-4,
+.film-container-5 {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth; 
+    overflow-y: hidden;
+    position: relative;
+}
+
+.film-card {
+    width: 200px;
+    height: 300px;
+    transition: transform 0.3s ease, border-radius 0.3s ease;
+    border-radius: 4px;
+    flex-shrink: 0; 
+}
+
+.film-card:hover {
+    transform: scale(1.15);
+    border-radius: 25px;
+}
+
+
+
+
+
+
