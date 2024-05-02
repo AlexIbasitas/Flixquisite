@@ -30,6 +30,7 @@ class Movie(models.Model):
     image_carousel_card = models.ImageField(upload_to='images/', default='images/default_image.png')
     image_feature_cover = models.FileField(upload_to='images/', default='images/default_image.png')
     video = models.FileField(upload_to='movie/', default='movie/65aaa30f-af07-4968-a1b0-c107bc902b90.mp4')
+    isSeries = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

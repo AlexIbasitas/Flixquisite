@@ -11,18 +11,43 @@ from django.shortcuts import get_object_or_404
 import plotly.express as px
 import plotly.graph_objs as go
 import pandas as pd
+from django.db.models import F
 
 
 # Restrict view to logged in users
 @login_required(login_url='login')
 def index(request):
-    movies = Movie.objects.all()
+    all_movies = Movie.objects.all()
 
-    featured_movie = movies[len(movies)-1]
+    recently_added_movies = Movie.objects.order_by('-id')[:15]
+
+    series = Movie.objects.filter(isSeries=True)
+    movies = Movie.objects.filter(isSeries=False)
+
+
+    # action_movies = Movie.objects.filter(genre='action')
+    # adventure_movies = Movie.objects.filter(genre='adventure')
+    # horror_movies = Movie.objects.filter(genre='horror')
+    # romance_movies = Movie.objects.filter(genre='romance')
+    # science_fiction_movies = Movie.objects.filter(genre='science fiction')
+    # thriller_movies = Movie.objects.filter(genre='thriller')
+    # fantasy_movies = Movie.objects.filter(genre='fantasy')
+    # animation_movies = Movie.objects.filter(genre='animation')
+    # documentary_movies = Movie.objects.filter(genre='documentary')
+    # mystery_movies = Movie.objects.filter(genre='mystery')
+    # comedy_movies = Movie.objects.filter(genre='comedy')
+
+    # Add isSeries parameter to 
+
+    # featured_movie = movies[len(movies)-1]
+    featured_movie = Movie.objects.get(title="Up")
 
     get_movies = {
-        'movies': movies,
+        'all_movies': all_movies,
         'featured_movie': featured_movie,
+        'recently_added_movies': recently_added_movies,
+        'series': series,
+        'movies': movies,
     }
     return render(request, 'index.html', get_movies)
 
@@ -33,7 +58,6 @@ def movie(request, pk):
     movie_details = Movie.objects.get(uu_id=movie_uu_id)
 
     attributes = {'movie_details' : movie_details}
-    print("Getting Movie")
     
     return render(request, 'movie.html', attributes)
 

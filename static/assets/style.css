@@ -81,7 +81,17 @@ a:hover {
 
 
 .prev-arrow,
-.next-arrow {
+.next-arrow, 
+.prev-arrow-1,
+.prev-arrow-2,
+.prev-arrow-3,
+.prev-arrow-4,
+.prev-arrow-5,
+.next-arrow-1,
+.next-arrow-2,
+.next-arrow-3,
+.next-arrow-4,
+.next-arrow-5{
     font-size: 1.5rem;
     width: 20px;
     height: 130px;
@@ -95,11 +105,27 @@ a:hover {
 }
 
 .prev-arrow:hover,
-.next-arrow:hover {
+.next-arrow:hover,
+.prev-arrow-1:hover,
+.prev-arrow-2:hover,
+.prev-arrow-3:hover,
+.prev-arrow-4:hover,
+.prev-arrow-5:hover
+.next-arrow-1:hover,
+.next-arrow-2:hover,
+.next-arrow-3:hover,
+.next-arrow-4:hover,
+.next-arrow-5:hover
+{
     background-color: #4a5568;
 }
 
-.film-container {
+.film-container, 
+.film-container-1, 
+.film-container-2, 
+.film-container-3,
+.film-container-4,
+.film-container-5 {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth; 
