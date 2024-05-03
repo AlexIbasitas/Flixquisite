@@ -13,29 +13,14 @@ import plotly.graph_objs as go
 # import pandas as pd
 # from django.db.models import F
 import collections
-# from datetime import time, timedelta, datetime
+from datetime import time, timedelta, datetime
 from django.core.cache import cache
 
-
-def get_cached_netflix_viewing_queryset():
-    queryset_key = 'netflix_viewing_queryset'
-    
-    # Try to retrieve the queryset from the cache
-    netflix_viewing_queryset = cache.get(queryset_key)
-    
-    if netflix_viewing_queryset is None:
-        # Query the database if the queryset is not cached
-        netflix_viewing_queryset = NetflixMovie.objects.all()[:100]
-        
-        # Cache the queryset for 1 hour
-        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
-    
-    return netflix_viewing_queryset
 
 # Restrict view to logged in users
 @login_required(login_url='login')
 def index(request):
-    all_movies = get_cached_netflix_viewing_queryset()
+    all_movies = NetflixMovie.objects.all()
 
     recently_added_movies = Movie.objects.order_by('-id')[:15]
 
@@ -222,6 +207,25 @@ def genre(request, pk):
 
 
 #### Netflix Wrapped ####
+def get_cached_netflix_viewing_queryset():
+    queryset_key = 'netflix_viewing_queryset'
+    
+    # Try to retrieve the queryset from the cache
+    netflix_viewing_queryset = cache.get(queryset_key)
+    
+    if netflix_viewing_queryset is None:
+        
+        # Adjust time period here
+        six_months_ago = datetime.now() - timedelta(days=12*30)
+        
+        # Query the database for records within the last 6 months
+        netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)
+        
+        # Cache the queryset for 1 hour
+        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+    
+    return netflix_viewing_queryset
+
 @login_required(login_url='login')
 def netflix_wrapped(request):
     watchTimeByMonth = getWatchTimeByMonth()
