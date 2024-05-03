@@ -15,6 +15,7 @@ import plotly.graph_objs as go
 import collections
 from datetime import time, timedelta, datetime
 from django.core.cache import cache
+from django.http import HttpResponseServerError
 
 
 # Restrict view to logged in users
@@ -225,7 +226,7 @@ def get_cached_netflix_viewing_queryset():
     if netflix_viewing_queryset is None:
         
         # Adjust time period here
-        six_months_ago = datetime.now() - timedelta(days=6*30)
+        six_months_ago = datetime.now() - timedelta(days=2*30)
         
         # Query the database for records within the last 6 months
         netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)
@@ -237,23 +238,31 @@ def get_cached_netflix_viewing_queryset():
 
 @login_required(login_url='login')
 def netflix_wrapped(request):
-    watchTimeByMonth = getWatchTimeByMonth()
-    watchTimeByDayOfWeek = getWatchTimeByDayOfWeek()
-    watchTimeByTimeOfDay = getWatchTimeByTimeOfDay()
-    top10MostWatchedTitles = getTop10MostWatchedTitles()
-    totalHoursWatched = round(getTotalHoursWatched(), 2)
-    totalUniqueTitlesWatched = getTotalUniqueTitlesWatched()
-    
-    context = {
-        'watchTimeByMonth': watchTimeByMonth,
-        'watchTimeByDayOfWeek': watchTimeByDayOfWeek,
-        'top10MostWatchedTitles': top10MostWatchedTitles,
-        'totalHoursWatched': totalHoursWatched,
-        'totalUniqueTitlesWatched': totalUniqueTitlesWatched,
-        'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
+    reload_count = 0
 
-    }
-    return render(request, 'netflix_wrapped.html', context)
+    while reload_count < 5:
+        try:
+            watchTimeByMonth = getWatchTimeByMonth()
+            watchTimeByDayOfWeek = getWatchTimeByDayOfWeek()
+            watchTimeByTimeOfDay = getWatchTimeByTimeOfDay()
+            top10MostWatchedTitles = getTop10MostWatchedTitles()
+            totalHoursWatched = round(getTotalHoursWatched(), 2)
+            totalUniqueTitlesWatched = getTotalUniqueTitlesWatched()
+            
+            context = {
+                'watchTimeByMonth': watchTimeByMonth,
+                'watchTimeByDayOfWeek': watchTimeByDayOfWeek,
+                'top10MostWatchedTitles': top10MostWatchedTitles,
+                'totalHoursWatched': totalHoursWatched,
+                'totalUniqueTitlesWatched': totalUniqueTitlesWatched,
+                'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
+            }
+            return render(request, 'netflix_wrapped.html', context)
+        except HttpResponseServerError as e:
+            reload_count += 1
+
+    return HttpResponseServerError("Failed to load the page after multiple retries")
+            
 
 
 def getTotalHoursWatched():

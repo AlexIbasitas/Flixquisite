@@ -51,6 +51,55 @@
             margin: 0;
         }
 
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+
+        .options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #upload-form {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 
@@ -104,3 +153,41 @@
     <div class="title-container">
         <h1 class="title">NETFLIX WRAPPED 🎁</h1>
     </div>
+
+
+
+
+    <div class="container">
+        <h1>Welcome to Netflix Wrapped</h1>
+        <div class="options">
+            <select id="duration">
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+            </select>
+            <button id="view-alex" onclick="viewNetflixWrapped('alex')">View Alex's Netflix Wrapped</button>
+            <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
+        </div>
+        <div id="upload-form" style="display: none;">
+            <!-- Add your upload form HTML here -->
+        </div>
+    </div>
+
+    <script>
+        function viewNetflixWrapped(user) {
+            // Get selected duration
+            var duration = document.getElementById("duration").value;
+            // Redirect to the appropriate URL based on the selected duration and user
+            window.location.href = "/netflix-wrapped?user=" + user + "&duration=" + duration;
+        }
+
+        function showUploadForm() {
+            var uploadForm = document.getElementById("upload-form");
+            if (uploadForm.style.display === "none") {
+                uploadForm.style.display = "block";
+            } else {
+                uploadForm.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
