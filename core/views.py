@@ -25,7 +25,7 @@ def get_cached_netflix_viewing_queryset():
     
     if netflix_viewing_queryset is None:
         # Query the database if the queryset is not cached
-        netflix_viewing_queryset = NetflixMovie.objects.all()[:1000]
+        netflix_viewing_queryset = NetflixMovie.objects.all()[:100]
         
         # Cache the queryset for 1 hour
         cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
