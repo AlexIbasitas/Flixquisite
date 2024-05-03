@@ -14,6 +14,8 @@ urlpatterns = [
     path('remove-from-my-movies', views.remove_from_my_movies, name='remove-from-my-movies'),
     path('search', views.search, name='search'),
 
-    # path('co2-chart', views.co2_chart, name='chart'),
     path('netflix-wrapped', views.netflix_wrapped, name='netflix-wrapped'),
+
+    # path('netflix-wrapped-landing-page', views.netflix_wrapped_landing_page, name='netflix-wrapped-landing-page'),
+
 ]

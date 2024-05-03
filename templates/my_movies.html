@@ -90,7 +90,9 @@
 
     <section class="py-10 px-5 relative">
         <!-- Previous Arrow -->
+        {% if movies %}
         <button class="prev-arrow absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 hover:bg-gray-600">‹</button>
+        {% endif %}
         <div class="film-container flex space-x-5 overflow-x-auto relative">
             {% for movie in movies %}
             <div class="w-40 h-64 flex-shrink-0 film-card" 
@@ -108,7 +110,10 @@
             {% endfor %}
         </div>
         <!-- Next Arrow -->
+        {% if movies %}
         <button class="next-arrow absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 hover:bg-gray-600">›</button>
+        {% endif %}
+
     </section>
     
     

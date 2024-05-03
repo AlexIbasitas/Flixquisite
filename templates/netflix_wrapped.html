@@ -34,6 +34,53 @@
             overflow-x: auto;
             overflow-y: hidden;
         }
+        .widget-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .widget {
+            width: calc(50% - 20px); 
+            padding: 20px;
+            border: 2px solid white; 
+            border-radius: 20px; 
+            background-color: #1a1a1a; 
+            color: white; 
+            font-size: 32px; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .widget h2 {
+            margin-top: 0; 
+        }
+
+        .widget .data {
+            font-size: 50px; 
+            color: red;
+        }
+
+        .title-container {
+            text-align: center;
+            padding: 20px;
+        }
+        @font-face {
+            font-family: 'Netflix Sans';
+            font-weight: 900;
+            font-display: optional;
+            src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff2) format('woff2'),url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff) format('woff')
+        }
+        .title {
+            font-family: 'Netflix Sans', Arial, sans-serif;
+            font-size: 80px;
+            color: red; 
+            margin: 0;
+        }
+
     </style>
 </head>
 
@@ -81,18 +128,30 @@
             </div>
         </div>
     </header>
+
     <hr>
 
+    <div class="title-container">
+        <h1 class="title">NETFLIX WRAPPED 🎁</h1>
+    </div>
 
-
-
+    <div class="widget-container">
+        <div class="widget">
+            <h2>Total Hours Watched</h2>
+            <div class="data">{{ totalHoursWatched }}</div>
+        </div>
+        <div class="widget">
+            <h2>Total Unique Titles Watched</h2>
+            <div class="data">{{ totalUniqueTitlesWatched }}</div>
+        </div>
+    </div>
 
     {% block content %}
+    {{ top10MostWatchedTitles|safe }}
     {{ watchTimeByMonth|safe }}
     {{ watchTimeByDayOfWeek|safe }}
-    {{ top10MostWatchedTitles|safe }}
+    {{ watchTimeByTimeOfDay|safe }}
     {% endblock content %}
-
 
 </body>
 

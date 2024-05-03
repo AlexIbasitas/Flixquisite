@@ -13,6 +13,7 @@ import plotly.graph_objs as go
 import pandas as pd
 from django.db.models import F
 import collections
+from datetime import time, timedelta, datetime
 
 
 # Restrict view to logged in users
@@ -24,21 +25,6 @@ def index(request):
 
     series = Movie.objects.filter(isSeries=True)
     movies = Movie.objects.filter(isSeries=False)
-
-
-    # action_movies = Movie.objects.filter(genre='action')
-    # adventure_movies = Movie.objects.filter(genre='adventure')
-    # horror_movies = Movie.objects.filter(genre='horror')
-    # romance_movies = Movie.objects.filter(genre='romance')
-    # science_fiction_movies = Movie.objects.filter(genre='science fiction')
-    # thriller_movies = Movie.objects.filter(genre='thriller')
-    # fantasy_movies = Movie.objects.filter(genre='fantasy')
-    # animation_movies = Movie.objects.filter(genre='animation')
-    # documentary_movies = Movie.objects.filter(genre='documentary')
-    # mystery_movies = Movie.objects.filter(genre='mystery')
-    # comedy_movies = Movie.objects.filter(genre='comedy')
-
-    # Add isSeries parameter to 
 
     # featured_movie = movies[len(movies)-1]
     featured_movie = Movie.objects.get(title="Up")
@@ -220,29 +206,108 @@ def genre(request, pk):
 
 
 #### Netflix Wrapped ####
-
-# 10 Insights:
-# 1. Monthly Watch Time: Calculate the total watch time for each month and plot it over time to see trends in viewing habits.
-# 2. Watch Time per Weekday: Analyze the average watch time for each weekday to identify patterns in viewing behavior throughout the week.
-# 3. Watch Time for Different Media Types: Categorize the viewing data by media type (e.g., movies, TV shows, documentaries) and compare the watch time for each category.
-# 4. Top 10 Most Watched Titles: Identify the top 10 most watched titles by total watch time and visualize them in a bar chart to see which shows or movies are the most popular.
-# 5. Top 10 Most Binge-watched Shows: Calculate the binge-watching ratio for each show (i.e., the proportion of total watch time spent on consecutive episodes) and identify the top 10 shows with the highest binge-watching ratios.
-# 6. Daily Viewing Patterns: Plot a histogram of the duration of viewing sessions to understand how long users typically spend watching Netflix in one sitting.
-# 7. Device Usage Distribution: Analyze the distribution of watch time across different device types (e.g., smart TVs, smartphones, tablets) to see which devices are most commonly used for viewing.
-# 8. Geographic Viewing Trends: Compare viewing habits across different countries or regions to identify cultural preferences or differences in content popularity.
-# 9. Autoplay Engagement Analysis: Analyze the frequency and duration of autoplayed content to understand how often users continue watching after autoplay kicks in.
-# 10. User Engagement Over Time: Plot the number of viewing sessions or watch time over time to track changes in user engagement with the platform.
+@login_required(login_url='login')
 def netflix_wrapped(request):
     watchTimeByMonth = getWatchTimeByMonth()
     watchTimeByDayOfWeek = getWatchTimeByDayOfWeek()
+    watchTimeByTimeOfDay = getWatchTimeByTimeOfDay()
     top10MostWatchedTitles = getTop10MostWatchedTitles()
+    totalHoursWatched = round(getTotalHoursWatched(), 2)
+    totalUniqueTitlesWatched = getTotalUniqueTitlesWatched()
     
     context = {
         'watchTimeByMonth': watchTimeByMonth,
         'watchTimeByDayOfWeek': watchTimeByDayOfWeek,
         'top10MostWatchedTitles': top10MostWatchedTitles,
+        'totalHoursWatched': totalHoursWatched,
+        'totalUniqueTitlesWatched': totalUniqueTitlesWatched,
+        'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
+
     }
     return render(request, 'netflix_wrapped.html', context)
+
+def getTotalHoursWatched():
+    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    total_hours = 0
+
+    for viewing in netflix_viewing_queryset:
+        duration_hours = viewing.duration.total_seconds() / 3600
+        total_hours += duration_hours
+    return total_hours
+
+def getTotalUniqueTitlesWatched():
+    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    unique_titles = set()
+
+    for viewing in netflix_viewing_queryset:
+        unique_titles.add(viewing.title)
+
+    return len(unique_titles)    
+
+def getWatchTimeByTimeOfDay():
+    netflix_viewing_queryset = NetflixMovie.objects.all()  # Assuming NetflixViewing is your model containing viewing data
+
+    # Define time bins for different parts of the day
+    time_bins = {
+        'Morning (6 am to 12 pm)': range(6, 12),  # 6 am to 12 pm
+        'Afternoon (12 pm to 6 pm)': range(12, 18),  # 12 pm to 6 pm
+        'Night (6 pm to 12 am)': range(18, 24),  # 6 pm to 12 am
+        'Demon Time (12 am to 6 am)': range(0, 6)  # 12 am to 6 am
+    }
+
+    # Initialize watch time for each time bin
+    watch_time_by_time_of_day = {time_bin: 0 for time_bin in time_bins}
+
+    # Aggregate watch time into different time bins
+    for viewing in netflix_viewing_queryset:
+        start_time = viewing.start_time.time()
+        end_time = (viewing.start_time + viewing.duration).time()
+
+        for time_bin, time_range in time_bins.items():
+            start_hour = start_time.hour
+            end_hour = end_time.hour
+
+            # Ensure the hour values are within the range of 0 to 23
+            start_hour %= 24
+            end_hour %= 24
+
+            if start_hour in time_range:
+                if end_hour in time_range:  # Viewing session entirely within the time bin
+                    watch_time_by_time_of_day[time_bin] += viewing.duration.total_seconds()
+                else:  # Viewing session spans multiple time bins
+                    if start_hour < end_hour:  # Viewing session starts and ends in different time bins
+                        watch_time_by_time_of_day[time_bin] += (end_time.hour - start_time.hour) * 3600 + (end_time.minute - start_time.minute) * 60 + (end_time.second - start_time.second)
+                    else:  # Viewing session starts in the current time bin and ends in the next time bin
+                        watch_time_by_time_of_day[time_bin] += (24 - start_time.hour) * 3600 + (start_time.minute * 60) + (start_time.second)
+                        next_time_bin = list(time_bins.keys())[(list(time_bins.keys()).index(time_bin) + 1) % len(time_bins)]
+                        watch_time_by_time_of_day[next_time_bin] += (end_time.hour * 3600) + (end_time.minute * 60) + (end_time.second)
+
+    # Convert watch time to hours
+    watch_time_by_time_of_day_hours = {time_bin: watch_time / 3600 for time_bin, watch_time in watch_time_by_time_of_day.items()}
+
+    # Create a bar chart
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=list(watch_time_by_time_of_day_hours.keys()),
+        y=list(watch_time_by_time_of_day_hours.values()),
+        marker_color='rgb(255, 0, 0)' 
+    ))
+
+    # Update layout
+    fig.update_layout(
+        title={
+            'text':'Watch Time by Time of Day',
+            'font':{'size':32}
+        },
+        xaxis=dict(title='Time of Day'),
+        yaxis=dict(title='Watch Time (hours)'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='white')
+    )
+
+    chart = fig.to_html()
+    return chart
 
 
 
@@ -276,7 +341,10 @@ def getTop10MostWatchedTitles():
     ))
 
     fig.update_layout(
-        title='Top 10 Most Watched Titles',
+        title={
+            'text':'Top 10 Most Watched Titles',
+            'font':{'size':32}
+        },
         xaxis=dict(title='Title'),
         yaxis=dict(title='Total Watch Time (minutes)'),
         plot_bgcolor='rgba(0,0,0,0)',
@@ -315,7 +383,10 @@ def getWatchTimeByDayOfWeek():
     ))
 
     fig.update_layout(
-        title='Watch Time by Weekday',
+        title={
+            'text':'Watch Time by Weekday',
+            'font':{'size':32}
+        },
         xaxis=dict(title='Weekday'),
         yaxis=dict(title='Total Watch Time (minutes)'),
         plot_bgcolor='rgba(0,0,0,0)',
@@ -362,7 +433,10 @@ def getWatchTimeByMonth():
     ))
 
     fig.update_layout(
-        title='Total Watch Time per Month',
+        title={
+            'text':'Total Watch Time per Month',
+            'font':{'size':32}
+        },
         xaxis=dict(title='Month'),
         yaxis=dict(title='Total Watch Time (minutes)'),
         plot_bgcolor='rgba(0,0,0,0)',
