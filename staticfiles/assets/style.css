@@ -147,29 +147,3 @@ a:hover {
 }
 
 
-
-.widget-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-}
-
-.widget {
-    width: calc(50% - 20px); 
-    padding: 20px;
-    border: 2px solid white; 
-    border-radius: 10px; 
-    background-color: #1a1a1a; 
-    color: white; 
-    font-size: 24px; 
-}
-
-.widget h2 {
-    margin-top: 0; /* Remove default margin */
-}
-
-.widget .data {
-    font-size: 42px; /* Larger font size for the numbers */
-    color: red;
-}

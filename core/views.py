@@ -8,12 +8,13 @@ from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-import plotly.express as px
+# import plotly.express as px
 import plotly.graph_objs as go
-import pandas as pd
-from django.db.models import F
+# import pandas as pd
+# from django.db.models import F
 import collections
-from datetime import time, timedelta, datetime
+# from datetime import time, timedelta, datetime
+from django.core.cache import cache
 
 
 # Restrict view to logged in users
@@ -226,8 +227,25 @@ def netflix_wrapped(request):
     }
     return render(request, 'netflix_wrapped.html', context)
 
+def get_cached_netflix_viewing_queryset():
+    queryset_key = 'netflix_viewing_queryset'
+    
+    # Try to retrieve the queryset from the cache
+    netflix_viewing_queryset = cache.get(queryset_key)
+    
+    if netflix_viewing_queryset is None:
+        # Query the database if the queryset is not cached
+        netflix_viewing_queryset = NetflixMovie.objects.all()
+        
+        # Cache the queryset for 1 hour
+        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+    
+    return netflix_viewing_queryset
+
 def getTotalHoursWatched():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    # netflix_viewing_queryset = NetflixMovie.objects.all()  
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+
     total_hours = 0
 
     for viewing in netflix_viewing_queryset:
@@ -236,7 +254,8 @@ def getTotalHoursWatched():
     return total_hours
 
 def getTotalUniqueTitlesWatched():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    # netflix_viewing_queryset = NetflixMovie.objects.all()  
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
     unique_titles = set()
 
     for viewing in netflix_viewing_queryset:
@@ -245,7 +264,8 @@ def getTotalUniqueTitlesWatched():
     return len(unique_titles)    
 
 def getWatchTimeByTimeOfDay():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  # Assuming NetflixViewing is your model containing viewing data
+    # netflix_viewing_queryset = NetflixMovie.objects.all() 
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
 
     # Define time bins for different parts of the day
     time_bins = {
@@ -312,7 +332,8 @@ def getWatchTimeByTimeOfDay():
 
 
 def getTop10MostWatchedTitles():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    # netflix_viewing_queryset = NetflixMovie.objects.all()  
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
 
     # Aggregate watch time for each title
     title_watch_time = collections.defaultdict(int)
@@ -356,7 +377,8 @@ def getTop10MostWatchedTitles():
     return chart
 
 def getWatchTimeByDayOfWeek():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    # netflix_viewing_queryset = NetflixMovie.objects.all()  
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
 
     # Extract data for watch time by weekday
     weekday_watch_time = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0, 'Sunday': 0}
@@ -400,7 +422,8 @@ def getWatchTimeByDayOfWeek():
 
 
 def getWatchTimeByMonth():
-    netflix_viewing_queryset = NetflixMovie.objects.all()  
+    # netflix_viewing_queryset = NetflixMovie.objects.all()  
+    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
 
     monthly_watch_time = {}
 
