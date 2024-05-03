@@ -20,7 +20,7 @@ from django.core.cache import cache
 # Restrict view to logged in users
 @login_required(login_url='login')
 def index(request):
-    all_movies = NetflixMovie.objects.all()
+    all_movies = Movie.objects.all()
 
     recently_added_movies = Movie.objects.order_by('-id')[:15]
 
@@ -205,6 +205,15 @@ def genre(request, pk):
 
     return render(request, 'genre.html', movie_attributes)
 
+#### Netflix Wrapped Landing Page ####
+@login_required(login_url='login')
+def netflix_wrapped_landing_page(request):
+    
+    context = {
+
+    }
+    return render(request, 'netflix_wrapped_landing_page.html', context)
+
 
 #### Netflix Wrapped ####
 def get_cached_netflix_viewing_queryset():
@@ -216,7 +225,7 @@ def get_cached_netflix_viewing_queryset():
     if netflix_viewing_queryset is None:
         
         # Adjust time period here
-        six_months_ago = datetime.now() - timedelta(days=12*30)
+        six_months_ago = datetime.now() - timedelta(days=6*30)
         
         # Query the database for records within the last 6 months
         netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)

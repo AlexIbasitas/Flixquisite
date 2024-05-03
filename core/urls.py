@@ -16,6 +16,6 @@ urlpatterns = [
 
     path('netflix-wrapped', views.netflix_wrapped, name='netflix-wrapped'),
 
-    # path('netflix-wrapped-landing-page', views.netflix_wrapped_landing_page, name='netflix-wrapped-landing-page'),
+    path('netflix-wrapped-landing-page', views.netflix_wrapped_landing_page, name='netflix-wrapped-landing-page'),
 
 ]
