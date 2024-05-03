@@ -17,10 +17,25 @@ import collections
 from django.core.cache import cache
 
 
+def get_cached_netflix_viewing_queryset():
+    queryset_key = 'netflix_viewing_queryset'
+    
+    # Try to retrieve the queryset from the cache
+    netflix_viewing_queryset = cache.get(queryset_key)
+    
+    if netflix_viewing_queryset is None:
+        # Query the database if the queryset is not cached
+        netflix_viewing_queryset = NetflixMovie.objects.all()[:1000]
+        
+        # Cache the queryset for 1 hour
+        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+    
+    return netflix_viewing_queryset
+
 # Restrict view to logged in users
 @login_required(login_url='login')
 def index(request):
-    all_movies = Movie.objects.all()
+    all_movies = get_cached_netflix_viewing_queryset()
 
     recently_added_movies = Movie.objects.order_by('-id')[:15]
 
@@ -28,7 +43,7 @@ def index(request):
     movies = Movie.objects.filter(isSeries=False)
 
     # featured_movie = movies[len(movies)-1]
-    featured_movie = Movie.objects.get(title="Up")
+    featured_movie = Movie.objects.get(title="Black Mirror")
 
     get_movies = {
         'all_movies': all_movies,
@@ -227,20 +242,6 @@ def netflix_wrapped(request):
     }
     return render(request, 'netflix_wrapped.html', context)
 
-def get_cached_netflix_viewing_queryset():
-    queryset_key = 'netflix_viewing_queryset'
-    
-    # Try to retrieve the queryset from the cache
-    netflix_viewing_queryset = cache.get(queryset_key)
-    
-    if netflix_viewing_queryset is None:
-        # Query the database if the queryset is not cached
-        netflix_viewing_queryset = NetflixMovie.objects.all()
-        
-        # Cache the queryset for 1 hour
-        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
-    
-    return netflix_viewing_queryset
 
 def getTotalHoursWatched():
     # netflix_viewing_queryset = NetflixMovie.objects.all()  
