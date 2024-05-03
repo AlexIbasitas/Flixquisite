@@ -44,14 +44,6 @@ class MyMovies(models.Model):
 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
-class CO2(models.Model):
-    date = models.DateField()
-    average = models.FloatField()
-
-    class Meta:
-        ordering = ('date',)
-
-
 class NetflixMovie(models.Model):
     # Profile Name,Start Time,Duration,Attributes,Title,Supplemental Video Type,Device Type,Bookmark,Latest Bookmark,Country
     profile_name = models.CharField(max_length=100)

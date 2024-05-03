@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .models import Movie, MyMovies, CO2, NetflixMovie
+from .models import Movie, MyMovies, NetflixMovie
 from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
@@ -296,7 +296,7 @@ def getWatchTimeByTimeOfDay():
     # Update layout
     fig.update_layout(
         title={
-            'text':'Watch Time by Time of Day',
+            'text':'Total Watch Time by Time of Day',
             'font':{'size':32}
         },
         xaxis=dict(title='Time of Day'),
@@ -384,10 +384,10 @@ def getWatchTimeByDayOfWeek():
 
     fig.update_layout(
         title={
-            'text':'Watch Time by Weekday',
+            'text':'Total Watch Time by Day of Week',
             'font':{'size':32}
         },
-        xaxis=dict(title='Weekday'),
+        xaxis=dict(title='Day of Week'),
         yaxis=dict(title='Total Watch Time (minutes)'),
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
@@ -434,7 +434,7 @@ def getWatchTimeByMonth():
 
     fig.update_layout(
         title={
-            'text':'Total Watch Time per Month',
+            'text':'Total Watch Time by Month',
             'font':{'size':32}
         },
         xaxis=dict(title='Month'),
