@@ -219,6 +219,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+###TODO 
+# Check debug logs to see how many times the logger logged 'reload count try'
+# Change the retry instead of retrying accessing the cache to renew the request
+
 #### Netflix Wrapped ####
 def get_cached_netflix_viewing_queryset():
     reload_count = 0
@@ -227,7 +231,8 @@ def get_cached_netflix_viewing_queryset():
 
     while reload_count < 5:
         try:
-            logger.error("Reload count try:", reload_count)
+            logger.error(f"Reload count try: {reload_count}")
+
             
             # Try to retrieve the queryset from the cache
             netflix_viewing_queryset = cache.get(queryset_key)
@@ -245,8 +250,9 @@ def get_cached_netflix_viewing_queryset():
             
             return netflix_viewing_queryset
         except Exception as e:
-            logger.error("Reload count err:", reload_count)
+            logger.error(f"Reload count ERROR: {reload_count}")
             reload_count += 1
+            return HttpResponseServerError(f"<script>window.location.reload();</script>")
 
     return HttpResponseServerError("Failed to load the page after multiple retries")
     
@@ -283,6 +289,8 @@ def netflix_wrapped(request):
         except requests.exceptions.RequestException as e:
             logger.error("Reload count:", reload_count)
             reload_count += 1
+            return HttpResponseServerError(f"<script>window.location.reload();</script>")
+
 
     return HttpResponseServerError("Failed to load the page after multiple retries")
 
