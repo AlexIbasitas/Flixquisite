@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <span><a href="/my-movies">My Movies</a></span>
+                <span><a href="/my-movies">My List</a></span>
                 <span><a href="/netflix-wrapped-landing-page">Netflix Wrapped</a></span>
             </nav>
         </div>
@@ -84,7 +84,7 @@
     <hr>
     <div align='center'>
         <h2 class="text-xl mb-5" style="padding-top: 20px">
-            My Movies
+            My List
         </h2>
     </div>
 
@@ -139,7 +139,7 @@
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
                 </a>
                 <button id="addToMyMoviesButton" onclick="removeItemFromMyMovies()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
-                    Remove from My Movies
+                    Remove from My List
                 </button>
             </div>
         </div>
@@ -205,7 +205,7 @@
                 success: function(data) {
                     // Handle success response if needed
                     toastr.success(data.message);
-                    console.log("Item removed from My Movies!");
+                    console.log("Item removed from My List!");
                     // var movieItemToRemove = document.querySelector('[data-movie-id="' + movieID + '"]');
                     // if (movieItemToRemove) {
                     //     movieItemToRemove.remove();
@@ -217,7 +217,7 @@
                 },
                 error: function(xhr, errmsg, err) {
                     // Handle error response if needed
-                    console.error("Error removing item from My Movies: " + errmsg);
+                    console.error("Error removing item from My List: " + errmsg);
                 }
             });
         }

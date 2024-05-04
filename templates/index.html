@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <span><a href="/my-movies">My Movies</a></span>
+                <span><a href="/my-movies">My List</a></span>
                 <span><a href="/netflix-wrapped-landing-page">Netflix Wrapped</a></span>
                 <!-- <span><a href="/netflix-wrapped">Netflix Wrapped</a></span> -->
             </nav>
@@ -222,7 +222,7 @@
                     <button class="bg-red-600 text-white p-2 px-5 rounded hover:bg-red-500">Play</button>
                 </a>
                 <button id="addToMyMoviesButton" onclick="addItemToMyMovies()" class="border border-white text-white p-2 px-5 rounded hover:bg-gray-700">
-                    Add to My Movies
+                    Add to My List
                 </button>
             </div>
         </div>
@@ -324,17 +324,17 @@
                 },
                 success: function(data) {
                     // Display toast notification with the message
-                    if (data.message === "Movie already in My Movies") {
+                    if (data.message === "Movie already in My List") {
                         toastr.warning(data.message);
                     } else {
                         toastr.success(data.message);
                     }
                     // Update button text and disable it
                     // $('#addToMyMoviesButton').text(data.message).prop('disabled', true);
-                    console.log("Item added to My Movies!");
+                    console.log("Item added to My List!");
                 },
                 error: function(xhr, errmsg, err) {
-                    console.error("Error adding item to My Movies: " + errmsg);
+                    console.error("Error adding item to My List: " + errmsg);
                 }
             });
         }

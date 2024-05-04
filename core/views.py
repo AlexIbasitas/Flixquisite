@@ -134,9 +134,9 @@ def add_to_my_movies(request):
         _, created = MyMovies.objects.get_or_create(user=request.user, movie=movie)
         
         if created:
-            response = {'status' : 'success', 'message': 'Added to My Movies'}
+            response = {'status' : 'success', 'message': 'Added to My List'}
         else:
-            response = {'status' : 'added', 'message': 'Movie already in My Movies'}
+            response = {'status' : 'added', 'message': 'Movie already in My List'}
         
         return JsonResponse(response)
     
@@ -161,13 +161,13 @@ def remove_from_my_movies(request):
         # Look for movie with given ID
         movie = get_object_or_404(Movie, uu_id=movie_id)
         
-        # Try to delete the movie from user's "My Movies" list
+        # Try to delete the movie from user's "My List" list
         try:
             my_movie = MyMovies.objects.get(user=request.user, movie=movie)
             my_movie.delete()
-            response = {'status': 'success', 'message': 'Removed from My Movies'}
+            response = {'status': 'success', 'message': 'Removed from My List'}
         except MyMovies.DoesNotExist:
-            response = {'status': 'not_found', 'message': 'Movie not found in My Movies'}
+            response = {'status': 'not_found', 'message': 'Movie not found in My List'}
         
         return JsonResponse(response)
     
