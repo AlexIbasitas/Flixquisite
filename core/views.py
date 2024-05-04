@@ -236,12 +236,19 @@ def get_cached_netflix_viewing_queryset():
     
     return netflix_viewing_queryset
 
+import requests
+
 @login_required(login_url='login')
 def netflix_wrapped(request):
     reload_count = 0
 
     while reload_count < 5:
         try:
+            # Make an external request
+            response = requests.get('https://netflix-pro-dev-tbjm.4.us-1.fl0.io/netflix-wrapped')
+            response.raise_for_status()  # Raise exception for non-2xx responses
+
+            # Process the response data
             watchTimeByMonth = getWatchTimeByMonth()
             watchTimeByDayOfWeek = getWatchTimeByDayOfWeek()
             watchTimeByTimeOfDay = getWatchTimeByTimeOfDay()
@@ -258,10 +265,12 @@ def netflix_wrapped(request):
                 'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
             }
             return render(request, 'netflix_wrapped.html', context)
-        except HttpResponseServerError as e:
+        
+        except requests.exceptions.RequestException as e:
             reload_count += 1
 
     return HttpResponseServerError("Failed to load the page after multiple retries")
+
             
 
 

@@ -168,15 +168,12 @@
             <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
         </div>
         <div id="upload-form" style="display: none;">
-            <!-- Add your upload form HTML here -->
         </div>
     </div>
 
     <script>
         function viewNetflixWrapped(user) {
-            // Get selected duration
             var duration = document.getElementById("duration").value;
-            // Redirect to the appropriate URL based on the selected duration and user
             window.location.href = "/netflix-wrapped?user=" + user + "&duration=" + duration;
         }
 
