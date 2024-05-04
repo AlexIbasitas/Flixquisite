@@ -143,7 +143,12 @@
         #upload-form {
             margin-top: 20px;
         }
-
+        .options > * {
+            display: block; /* Make each element take the full width */
+        }
+        .button-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -215,21 +220,27 @@
         <div id="upload-form" style="display: none;">
         </div>
     </div> -->
+
     <div class="container">
         <div class="options">
             <h2 class="header">Select Your Netflix Wrapped Period</h2>
-            <select id="duration" style="color: black;">
+            <select id="duration" style='color: black;'>
                 <option value="2">2 Months Ago</option>
                 <option value="6">6 Months Ago</option>
             </select>
+        </div>
+        
+        <div class="upload-options">
             <h2 class="header">Upload your Netflix Viewing Activity</h2>
             <button id="view-alex" onclick="viewNetflixWrapped('alex')">View Alex's Netflix Wrapped</button>
             <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
         </div>
+        
         <div id="upload-form" style="display: none;">
             <!-- Upload form content will go here -->
         </div>
     </div>
+
 
     <script>
         function viewNetflixWrapped(user) {

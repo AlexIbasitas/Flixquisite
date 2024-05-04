@@ -189,3 +189,23 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
 
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'myapp': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

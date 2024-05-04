@@ -215,6 +215,9 @@ def netflix_wrapped_landing_page(request):
     }
     return render(request, 'netflix_wrapped_landing_page.html', context)
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 #### Netflix Wrapped ####
 def get_cached_netflix_viewing_queryset():
@@ -224,7 +227,7 @@ def get_cached_netflix_viewing_queryset():
 
     while reload_count < 5:
         try:
-            print("Reload count try:", reload_count)
+            logger.error("Reload count try:", reload_count)
             
             # Try to retrieve the queryset from the cache
             netflix_viewing_queryset = cache.get(queryset_key)
@@ -242,7 +245,7 @@ def get_cached_netflix_viewing_queryset():
             
             return netflix_viewing_queryset
         except Exception as e:
-            print("Reload count err:", reload_count)
+            logger.error("Reload count err:", reload_count)
             reload_count += 1
 
     return HttpResponseServerError("Failed to load the page after multiple retries")
@@ -257,7 +260,7 @@ def netflix_wrapped(request):
 
     while reload_count < 5:
         try:
-            print("Reload count:", reload_count)
+            logger.error("Reload count:", reload_count)
 
             # Process the response data
             watchTimeByMonth = getWatchTimeByMonth()
@@ -278,7 +281,7 @@ def netflix_wrapped(request):
             return render(request, 'netflix_wrapped.html', context)
         
         except requests.exceptions.RequestException as e:
-            print("Reload count:", reload_count)
+            logger.error("Reload count:", reload_count)
             reload_count += 1
 
     return HttpResponseServerError("Failed to load the page after multiple retries")
