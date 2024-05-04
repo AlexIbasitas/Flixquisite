@@ -244,9 +244,7 @@ def netflix_wrapped(request):
 
     while reload_count < 5:
         try:
-            # Make an external request
-            response = requests.get('https://netflix-pro-dev-tbjm.4.us-1.fl0.io/netflix-wrapped')
-            response.raise_for_status()  # Raise exception for non-2xx responses
+            print("Reload count:", reload_count)
 
             # Process the response data
             watchTimeByMonth = getWatchTimeByMonth()
