@@ -211,20 +211,25 @@
             <div class="button-container">
                 <button id="view-alex" onclick="viewNetflixWrapped('alex')" style="font-size: 25px;">View Alex's Netflix Wrapped</button>
                 <span class="or-text">OR</span>
-                <button id="upload" onclick="showUploadForm()" style="font-size: 25px;">Upload Your Viewing Activity</button>
+
+                <input type="file" name="csv_file" accept=".csv" id="file-input" style="display: none;">
+                <label for="file-input" id="upload-label" style="cursor: pointer; font-size: 25px; background-color: rgba(90,88,84,255); color: white; padding: 10px; border-radius: 5px;">Upload Your Viewing Activity</label>
             </div>
         </div>
         <div>
             <p style="color: black; font-size: 20px;">Download your Netflix Viewing Activity <a target="_blank" style="color: blue;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" href="https://www.netflix.com/settings/viewing-history">here</a></p>
         </div>
 
+
         <div id="upload-form" style="display: none;">
             <form action="/upload-csv/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="file" name="csv_file" accept=".csv">
-                <button type="submit">Upload CSV</button>
+                <!-- Hidden file input field -->
+                <input type="file" name="csv_file" accept=".csv" style="display: none;" id="file-input">
+                <button type="submit" style="display: none;">Submit</button>
             </form>
         </div>
+        
     </div>
     
 
@@ -238,14 +243,23 @@
             window.location.href = "/netflix-wrapped?user=" + user + "&duration=" + duration;
         }
 
-        function showUploadForm() {
-            var uploadForm = document.getElementById("upload-form");
-            if (uploadForm.style.display === "none") {
-                uploadForm.style.display = "block";
+
+        // Function to display selected file name in the label
+        document.getElementById("file-input").addEventListener("change", function() {
+            var label = document.getElementById("upload-label");
+            if (this.files.length > 0) {
+                label.textContent = this.files[0].name; 
             } else {
-                uploadForm.style.display = "none";
+                label.textContent = "Upload Your Viewing Activity"; 
             }
-        }
+        });
+
+        document.getElementById("upload-label").addEventListener("mouseenter", function() {
+            this.style.backgroundColor = "rgb(20, 19, 19)";
+        });
+        document.getElementById("upload-label").addEventListener("mouseleave", function() {
+            this.style.backgroundColor = "rgba(90, 88, 84, 255)";
+        });
     </script>
 </body>
 </html>
