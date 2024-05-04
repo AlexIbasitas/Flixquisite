@@ -267,6 +267,7 @@ def netflix_wrapped(request):
             return render(request, 'netflix_wrapped.html', context)
         
         except requests.exceptions.RequestException as e:
+            print("Reload count:", reload_count)
             reload_count += 1
 
     return HttpResponseServerError("Failed to load the page after multiple retries")

@@ -52,9 +52,9 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            margin: 0px auto;
             padding: 20px;
+            width: 50%;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -82,14 +82,14 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: red;
+            color: #141414;
             font-size: 16px;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: rgb(115, 34, 34);
         }
 
         #upload-form {
@@ -158,11 +158,12 @@
 
 
     <div class="container">
-        <h1>Welcome to Netflix Wrapped</h1>
         <div class="options">
-            <select id="duration">
-                <option value="3">3 Months</option>
-                <option value="6">6 Months</option>
+            <p style="color: black;">Select Your Netflix Wrapped Period</p>
+            <select id="duration" style='color: black;'>
+                <option value="2">2 Months Ago</option>
+                <option value="2">2 Months Ago</option>
+                <option value="6">6 Months Ago</option>
             </select>
             <button id="view-alex" onclick="viewNetflixWrapped('alex')">View Alex's Netflix Wrapped</button>
             <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
