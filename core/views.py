@@ -218,23 +218,36 @@ def netflix_wrapped_landing_page(request):
 
 #### Netflix Wrapped ####
 def get_cached_netflix_viewing_queryset():
+    reload_count = 0
     queryset_key = 'netflix_viewing_queryset'
+
+
+    while reload_count < 5:
+        try:
+            print("Reload count try:", reload_count)
+            
+            # Try to retrieve the queryset from the cache
+            netflix_viewing_queryset = cache.get(queryset_key)
+            
+            if netflix_viewing_queryset is None:
+                
+                # Adjust time period here
+                six_months_ago = datetime.now() - timedelta(days=6*30)
+                
+                # Query the database for records within the last 6 months
+                netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)
+                
+                # Cache the queryset for 1 hour
+                cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+            
+            return netflix_viewing_queryset
+        except Exception as e:
+            print("Reload count err:", reload_count)
+            reload_count += 1
+
+    return HttpResponseServerError("Failed to load the page after multiple retries")
     
-    # Try to retrieve the queryset from the cache
-    netflix_viewing_queryset = cache.get(queryset_key)
-    
-    if netflix_viewing_queryset is None:
-        
-        # Adjust time period here
-        six_months_ago = datetime.now() - timedelta(days=2*30)
-        
-        # Query the database for records within the last 6 months
-        netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)
-        
-        # Cache the queryset for 1 hour
-        cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
-    
-    return netflix_viewing_queryset
+
 
 import requests
 

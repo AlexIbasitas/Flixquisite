@@ -17,6 +17,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <style>
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         a {
             color: white;
             text-decoration: none;
@@ -53,7 +60,7 @@
 
         .container {
             width: 50%;
-            height: 800px;
+            height: 50%;
             margin: auto;
             padding: 20px;
             background-color: #fff;
@@ -64,6 +71,7 @@
             justify-content: center;
             align-items: center;
         }
+
 
 
         .options {
@@ -102,6 +110,38 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .options p, .options select, .options button {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #upload-form {
+            margin-top: 20px;
         }
 
     </style>
@@ -161,7 +201,7 @@
 
 
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="options">
             <p style="color: black;">Select Your Netflix Wrapped Period</p>
             <select id="duration" style='color: black;'>
@@ -173,6 +213,21 @@
             <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
         </div>
         <div id="upload-form" style="display: none;">
+        </div>
+    </div> -->
+    <div class="container">
+        <div class="options">
+            <h2 class="header">Select Your Netflix Wrapped Period</h2>
+            <select id="duration" style="color: black;">
+                <option value="2">2 Months Ago</option>
+                <option value="6">6 Months Ago</option>
+            </select>
+            <h2 class="header">Upload your Netflix Viewing Activity</h2>
+            <button id="view-alex" onclick="viewNetflixWrapped('alex')">View Alex's Netflix Wrapped</button>
+            <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
+        </div>
+        <div id="upload-form" style="display: none;">
+            <!-- Upload form content will go here -->
         </div>
     </div>
 
