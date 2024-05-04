@@ -52,33 +52,42 @@
             src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff2) format('woff2'),url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Blk.woff) format('woff')
         }
         .title {
-            font-family: 'Netflix Sans', Arial, sans-serif;
+            font-family: 'Netflix Sans', 'Arial Black';
             font-size: 80px;
             color: red; 
             margin: 0;
         }
+        .header {
+            font-family: 'Netflix Sans', 'Arial Black';
+            font-size: 40px;
+            color: red; 
+            margin: 0;
+            margin-bottom: 2%; 
+        }
+
 
         .container {
-            width: 50%;
-            height: 50%;
+            width: 80%;
             margin: auto;
-            padding: 20px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             display: flex;
-            justify-content: center;
+            flex-direction: column; 
             align-items: center;
+            justify-content: space-between; 
+            height: 50%; 
+            padding: 5%; 
+            box-sizing: border-box; 
         }
 
-
-
-        .options {
-            margin-top: 20px;
+        .options, .upload-options {
+            flex: 1; 
+            margin: 2% 0; 
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center; 
         }
 
         select {
@@ -87,22 +96,37 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
-            font-size: 16px;
+            font-size: 25px;
+            margin-bottom: 2%; 
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            /* margin-top: 2%;  */
+        }
+
+        .or-text {
+            margin: 0 10px;
+            color: black;
         }
 
         button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: red;
-            color: #141414;
-            font-size: 16px;
+            color: #fff;
             cursor: pointer;
+            margin: 2% 0; 
+            background-color: rgba(90,88,84,255); 
         }
 
-        button:hover {
-            background-color: rgb(115, 34, 34);
+        button:hover, select:hover {
+            background-color: rgb(20, 19, 19);
         }
+
+
 
         #upload-form {
             margin-top: 20px;
@@ -110,6 +134,10 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: none; 
+            flex: 1; 
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -162,18 +190,16 @@
 
     <hr>
 
+
     <div class="title-container">
         <h1 class="title">NETFLIX WRAPPED 🎁</h1>
     </div>
 
-
-
-
-    <div class="container" style="display: flex; flex-direction: column;">
+    <div class="container">
         <!-- Select Your Netflix Wrapped Period Section -->
-        <div class="options" style="margin-bottom: 20px;">
+        <div class="options">
             <h2 class="header">Select Your Netflix Wrapped Period</h2>
-            <select id="duration" style="color: black;">
+            <select id="duration" style="background-color: rgba(90,88,84,255); text-align: center;">
                 <option value="2">2 Months Ago</option>
                 <option value="6">6 Months Ago</option>
             </select>
@@ -182,15 +208,26 @@
         <!-- Upload Your Netflix Viewing Activity Section -->
         <div class="upload-options">
             <h2 class="header">Upload your Netflix Viewing Activity</h2>
-            <button id="view-alex" onclick="viewNetflixWrapped('alex')">View Alex's Netflix Wrapped</button>
-            <button id="upload" onclick="showUploadForm()">Upload Your Viewing Activity</button>
+            <div class="button-container">
+                <button id="view-alex" onclick="viewNetflixWrapped('alex')" style="font-size: 25px;">View Alex's Netflix Wrapped</button>
+                <span class="or-text">OR</span>
+                <button id="upload" onclick="showUploadForm()" style="font-size: 25px;">Upload Your Viewing Activity</button>
+            </div>
         </div>
-    
-        <!-- Hidden Upload Form -->
+        <div>
+            <p style="color: black; font-size: 20px;">Download your Netflix Viewing Activity <a target="_blank" style="color: blue;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" href="https://www.netflix.com/settings/viewing-history">here</a></p>
+        </div>
+
         <div id="upload-form" style="display: none;">
-            <!-- Upload form content will go here -->
+            <form action="/upload-csv/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="csv_file" accept=".csv">
+                <button type="submit">Upload CSV</button>
+            </form>
         </div>
     </div>
+    
+
     
     
 
