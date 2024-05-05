@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.models import auth
 from django.contrib import messages
-from .models import Movie, MyMovies, NetflixMovie
+from .models import Movie, MyMovies, NetflixMovie, UserMovie
 from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
@@ -16,6 +16,14 @@ import collections
 from datetime import time, timedelta, datetime
 from django.core.cache import cache
 from django.http import HttpResponseServerError
+from django.shortcuts import render
+from django.utils import timezone
+from .forms import UploadFileForm
+from .models import NetflixMovie
+import csv
+from datetime import datetime, timedelta
+from io import TextIOWrapper
+
 
 
 # Restrict view to logged in users
@@ -207,99 +215,132 @@ def genre(request, pk):
     return render(request, 'genre.html', movie_attributes)
 
 #### Netflix Wrapped Landing Page ####
+# In order to get the updated user file, a restarting of the server is required
 @login_required(login_url='login')
 def netflix_wrapped_landing_page(request):
-    
-    context = {
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            if file.name.endswith('.csv'):
+                try:
+                    UserMovie.objects.all().delete()
+                    csv_file_wrapper = TextIOWrapper(file, encoding='utf-8')
+                    reader = csv.DictReader(csv_file_wrapper)
+                    for row in reader:
+                        start_time = timezone.make_aware(datetime.strptime(row['Start Time'], '%Y-%m-%d %H:%M:%S'))
 
-    }
-    return render(request, 'netflix_wrapped_landing_page.html', context)
+                        # Check if the start time is within the last year
+                        one_year_ago = timezone.now() - timedelta(days=365)
+                        if start_time >= one_year_ago:
+                            dur_hours, dur_minutes, dur_seconds = map(int, row['Duration'].split(':'))
+                            duration = timedelta(hours=dur_hours, minutes=dur_minutes, seconds=dur_seconds)
 
-import logging
+                            attributes = row['Attributes']
+                            title = row['Title']
+                            supplemental_video_type = row['Supplemental Video Type']
+                            device_type = row['Device Type']
 
-logger = logging.getLogger(__name__)
+                            book_hours, book_minutes, book_seconds = map(int, row['Bookmark'].split(':'))
+                            bookmark = timedelta(hours=book_hours, minutes=book_minutes, seconds=book_seconds)
 
-###TODO 
-# Check debug logs to see how many times the logger logged 'reload count try'
-# Change the retry instead of retrying accessing the cache to renew the request
+                            # Catch 'Not latest view' exception
+                            latest_bookmark = timedelta(days=-1)
+                            if row['Latest Bookmark'] != 'Not latest view':
+                                latest_hours, latest_minutes, latest_seconds = map(int, row['Latest Bookmark'].split(':'))
+                                latest_bookmark = timedelta(hours=latest_hours, minutes=latest_minutes, seconds=latest_seconds)
 
-#### Netflix Wrapped ####
-def get_cached_netflix_viewing_queryset():
-    reload_count = 0
-    queryset_key = 'netflix_viewing_queryset'
+                            country = row['Country']
 
+                            # Create and save NetflixMovie object
+                            UserMovie.objects.create(
+                                profile_name=row['Profile Name'],
+                                start_time=start_time,
+                                duration=duration,
+                                attributes=attributes,
+                                title=title,
+                                supplemental_video_type=supplemental_video_type,
+                                device_type=device_type,
+                                bookmark=bookmark,
+                                latest_bookmark=latest_bookmark,
+                                country=country
+                            )
 
-    while reload_count < 5:
-        try:
-            logger.error(f"Reload count try: {reload_count}")
-
-            
-            # Try to retrieve the queryset from the cache
-            netflix_viewing_queryset = cache.get(queryset_key)
-            
-            if netflix_viewing_queryset is None:
-                
-                # Adjust time period here
-                six_months_ago = datetime.now() - timedelta(days=6*30)
-                
-                # Query the database for records within the last 6 months
-                netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=six_months_ago)
-                
-                # Cache the queryset for 1 hour
-                cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
-            
-            return netflix_viewing_queryset
-        except Exception as e:
-            logger.error(f"Reload count ERROR: {reload_count}")
-            reload_count += 1
-            return HttpResponseServerError(f"<script>window.location.reload();</script>")
-
-    return HttpResponseServerError("Failed to load the page after multiple retries")
-    
+                    # Get all records from the database where start time is within the last year
+                    one_year_ago = timezone.now() - timedelta(days=365)
+                    records_within_last_year = UserMovie.objects.filter(start_time__gte=one_year_ago)
+                    print("Gathered records within the last year and sending to netflix_wrapped_landing_page.html")
+                    return render(request, 'netflix_wrapped_landing_page.html', {'data': records_within_last_year})
+                except Exception as e:
+                    return render(request, 'netflix_wrapped_landing_page.html', {'error_message': f"Error processing CSV: {str(e)}"})
+            else:
+                return render(request, 'netflix_wrapped_landing_page.html', {'error_message': 'Only CSV files are allowed.'})
+    else:
+        form = UploadFileForm()
+   
+    return render(request, 'netflix_wrapped_landing_page.html', {'form': form})
 
 
-import requests
+# Correct Cached
+# def get_cached_netflix_viewing_queryset(duration):
+#     queryset_key = 'netflix_viewing_queryset'    
+#     # Try to retrieve the queryset from the cache
+#     netflix_viewing_queryset = cache.get(queryset_key)
+#     if netflix_viewing_queryset is None:
+#         X_months_ago = datetime.now() - timedelta(days=int(duration)*30)
+#         netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=X_months_ago)
+#         cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+#     return netflix_viewing_queryset
+
+# def get_user_cached_netflix_viewing_queryset(duration):
+#     queryset_key = 'user_netflix_viewing_queryset'    
+#     # Try to retrieve the queryset from the cache
+#     netflix_viewing_queryset = cache.get(queryset_key)
+#     if netflix_viewing_queryset is None:
+#         X_months_ago = datetime.now() - timedelta(days=int(duration)*30)
+#         netflix_viewing_queryset = UserMovie.objects.filter(start_time__gte=X_months_ago)
+#         cache.set(queryset_key, netflix_viewing_queryset, timeout=3600)
+#     return netflix_viewing_queryset
+
+
+def get_cached_netflix_viewing_queryset(duration):
+    X_months_ago = datetime.now() - timedelta(days=int(duration)*30)
+    netflix_viewing_queryset = NetflixMovie.objects.filter(start_time__gte=X_months_ago)
+    return netflix_viewing_queryset
+
+def get_user_cached_netflix_viewing_queryset(duration):
+    X_months_ago = datetime.now() - timedelta(days=int(duration)*30)
+    netflix_viewing_queryset = UserMovie.objects.filter(start_time__gte=X_months_ago) 
+    return netflix_viewing_queryset
 
 @login_required(login_url='login')
 def netflix_wrapped(request):
-    reload_count = 0
+    user = request.GET.get('user')
+    duration = request.GET.get('duration')
 
-    while reload_count < 5:
-        try:
-            logger.error("Reload count:", reload_count)
-
-            # Process the response data
-            watchTimeByMonth = getWatchTimeByMonth()
-            watchTimeByDayOfWeek = getWatchTimeByDayOfWeek()
-            watchTimeByTimeOfDay = getWatchTimeByTimeOfDay()
-            top10MostWatchedTitles = getTop10MostWatchedTitles()
-            totalHoursWatched = round(getTotalHoursWatched(), 2)
-            totalUniqueTitlesWatched = getTotalUniqueTitlesWatched()
+    # Process the response data
+    watchTimeByMonth = getWatchTimeByMonth(user, duration)
+    watchTimeByDayOfWeek = getWatchTimeByDayOfWeek(user, duration)
+    watchTimeByTimeOfDay = getWatchTimeByTimeOfDay(user, duration)
+    top10MostWatchedTitles = getTop10MostWatchedTitles(user, duration)
+    totalHoursWatched = round(getTotalHoursWatched(user, duration), 2)
+    totalUniqueTitlesWatched = getTotalUniqueTitlesWatched(user, duration)
+    
+    context = {
+        'watchTimeByMonth': watchTimeByMonth,
+        'watchTimeByDayOfWeek': watchTimeByDayOfWeek,
+        'top10MostWatchedTitles': top10MostWatchedTitles,
+        'totalHoursWatched': totalHoursWatched,
+        'totalUniqueTitlesWatched': totalUniqueTitlesWatched,
+        'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
+    }
+    return render(request, 'netflix_wrapped.html', context)
             
-            context = {
-                'watchTimeByMonth': watchTimeByMonth,
-                'watchTimeByDayOfWeek': watchTimeByDayOfWeek,
-                'top10MostWatchedTitles': top10MostWatchedTitles,
-                'totalHoursWatched': totalHoursWatched,
-                'totalUniqueTitlesWatched': totalUniqueTitlesWatched,
-                'watchTimeByTimeOfDay': watchTimeByTimeOfDay,
-            }
-            return render(request, 'netflix_wrapped.html', context)
-        
-        except requests.exceptions.RequestException as e:
-            logger.error("Reload count:", reload_count)
-            reload_count += 1
-            return HttpResponseServerError(f"<script>window.location.reload();</script>")
-
-
-    return HttpResponseServerError("Failed to load the page after multiple retries")
-
-            
-
-
-def getTotalHoursWatched():
-    # netflix_viewing_queryset = NetflixMovie.objects.all()  
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getTotalHoursWatched(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
 
     total_hours = 0
 
@@ -308,9 +349,12 @@ def getTotalHoursWatched():
         total_hours += duration_hours
     return total_hours
 
-def getTotalUniqueTitlesWatched():
-    # netflix_viewing_queryset = NetflixMovie.objects.all()  
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getTotalUniqueTitlesWatched(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
+
     unique_titles = set()
 
     for viewing in netflix_viewing_queryset:
@@ -318,9 +362,11 @@ def getTotalUniqueTitlesWatched():
 
     return len(unique_titles)    
 
-def getWatchTimeByTimeOfDay():
-    # netflix_viewing_queryset = NetflixMovie.objects.all() 
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getWatchTimeByTimeOfDay(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
 
     # Define time bins for different parts of the day
     time_bins = {
@@ -386,9 +432,11 @@ def getWatchTimeByTimeOfDay():
 
 
 
-def getTop10MostWatchedTitles():
-    # netflix_viewing_queryset = NetflixMovie.objects.all()  
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getTop10MostWatchedTitles(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
 
     # Aggregate watch time for each title
     title_watch_time = collections.defaultdict(int)
@@ -431,9 +479,11 @@ def getTop10MostWatchedTitles():
     chart = fig.to_html()   
     return chart
 
-def getWatchTimeByDayOfWeek():
-    # netflix_viewing_queryset = NetflixMovie.objects.all()  
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getWatchTimeByDayOfWeek(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
 
     # Extract data for watch time by weekday
     weekday_watch_time = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0, 'Sunday': 0}
@@ -476,9 +526,11 @@ def getWatchTimeByDayOfWeek():
 
 
 
-def getWatchTimeByMonth():
-    # netflix_viewing_queryset = NetflixMovie.objects.all()  
-    netflix_viewing_queryset = get_cached_netflix_viewing_queryset()
+def getWatchTimeByMonth(user, duration):
+    if user.lower() == 'alex':
+        netflix_viewing_queryset = get_cached_netflix_viewing_queryset(duration)
+    else:
+        netflix_viewing_queryset = get_user_cached_netflix_viewing_queryset(duration)
 
     monthly_watch_time = {}
 
@@ -527,3 +579,83 @@ def getWatchTimeByMonth():
 
 
 
+###TODO 
+
+# The error is below right here. There is an issue with how netflix_movie is being created
+# See in load_viewing_activity.py, there is additional processing to load the values into the model
+    # The dates/times have to be split into hours, minutes, seconds to create datetime objects
+    # Catch 'Not latest View' exception for the 'latest bookmark field'
+
+# The code here seems to have deleted Alex's NetflixMovie objects, so that has to be reloaded 
+
+
+# def upload_csv(request):
+#     if request.method == 'POST':
+#         form = UploadFileForm(request.POST, request.FILES)
+#         if form.is_valid():
+
+#             file = request.FILES['file']
+#             print("filename =", file.name)
+#             if file.name.endswith('.csv'):
+#                 try:
+#                     UserMovie.objects.all().delete()
+
+#                     # Wrap the file object with TextIOWrapper and specify encoding
+#                     csv_file_wrapper = TextIOWrapper(file, encoding='utf-8')
+
+#                     reader = csv.DictReader(csv_file_wrapper)
+#                     c = 0
+#                     for row in reader:
+#                         if c < 5: print(row['Profile Name'])
+#                         c += 1
+#                         start_time = timezone.make_aware(datetime.strptime(row['Start Time'], '%Y-%m-%d %H:%M:%S'))
+
+#                         # Check if the start time is within the last year
+#                         one_year_ago = timezone.now() - timedelta(days=365)
+#                         if start_time >= one_year_ago:
+#                             dur_hours, dur_minutes, dur_seconds = map(int, row['Duration'].split(':'))
+#                             duration = timedelta(hours=dur_hours, minutes=dur_minutes, seconds=dur_seconds)
+
+#                             attributes = row['Attributes']
+#                             title = row['Title']
+#                             supplemental_video_type = row['Supplemental Video Type']
+#                             device_type = row['Device Type']
+
+#                             book_hours, book_minutes, book_seconds = map(int, row['Bookmark'].split(':'))
+#                             bookmark = timedelta(hours=book_hours, minutes=book_minutes, seconds=book_seconds)
+
+#                             # Catch 'Not latest view' exception
+#                             latest_bookmark = timedelta(days=-1)
+#                             if row['Latest Bookmark'] != 'Not latest view':
+#                                 latest_hours, latest_minutes, latest_seconds = map(int, row['Latest Bookmark'].split(':'))
+#                                 latest_bookmark = timedelta(hours=latest_hours, minutes=latest_minutes, seconds=latest_seconds)
+
+#                             country = row['Country']
+
+#                             # Create and save NetflixMovie object
+#                             UserMovie.objects.create(
+#                                 profile_name=row['Profile Name'],
+#                                 start_time=start_time,
+#                                 duration=duration,
+#                                 attributes=attributes,
+#                                 title=title,
+#                                 supplemental_video_type=supplemental_video_type,
+#                                 device_type=device_type,
+#                                 bookmark=bookmark,
+#                                 latest_bookmark=latest_bookmark,
+#                                 country=country
+#                             )
+
+#                     # Get all records from the database where start time is within the last year
+#                     one_year_ago = timezone.now() - timedelta(days=365)
+#                     records_within_last_year = UserMovie.objects.filter(start_time__gte=one_year_ago)
+#                     print("Gathered records within the last year and sending to upload.html")
+#                     return render(request, 'upload.html', {'data': records_within_last_year})
+#                 except Exception as e:
+#                     return render(request, 'upload.html', {'error_message': f"Error processing CSV: {str(e)}"})
+#             else:
+#                 return render(request, 'upload.html', {'error_message': 'Only CSV files are allowed.'})
+#     else:
+#         form = UploadFileForm()
+   
+#     return render(request, 'upload.html', {'form': form})

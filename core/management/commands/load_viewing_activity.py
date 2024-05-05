@@ -1,3 +1,4 @@
+#### All Years ####
 # import csv
 # import datetime
 # from itertools import islice
@@ -55,6 +56,8 @@
 
 
 
+
+# 1 year Limitation
 import csv
 import datetime
 from django.conf import settings
@@ -68,10 +71,11 @@ class Command(BaseCommand):
         datafile = settings.BASE_DIR / 'data' / 'ViewingActivity.csv'
 
         one_year_ago = datetime.datetime.now() - datetime.timedelta(days=365)
-        NetflixMovie.objects.filter(start_time__lt=one_year_ago).delete()
+        # NetflixMovie.objects.filter(start_time__lt=one_year_ago).delete()
 
         with open(datafile, 'r', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
+            NetflixMovie.objects.all().delete()
             for row in reader:
                 start_time = datetime.datetime.strptime(row['Start Time'], '%Y-%m-%d %H:%M:%S')
 
@@ -113,3 +117,6 @@ class Command(BaseCommand):
                     )
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully.'))
+
+
+

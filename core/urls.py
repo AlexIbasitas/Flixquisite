@@ -18,4 +18,6 @@ urlpatterns = [
 
     path('netflix-wrapped-landing-page', views.netflix_wrapped_landing_page, name='netflix-wrapped-landing-page'),
 
+    # path('upload', views.upload_csv, name='upload_csv'),
+
 ]

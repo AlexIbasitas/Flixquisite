@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload CSV</title>
+</head>
+<body>
+
+    <h1>Upload CSV File</h1>
+
+    {% if error_message %}
+    <p>Error: {{ error_message }}</p>
+    {% endif %}
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if data %}
+    <h2>First 10 records:</h2>
+    <table>
+        <tr>
+            <th>Profile Name</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>Attributes</th>
+            <th>Title</th>
+            <th>Supplemental Video Type</th>
+            <th>Device Type</th>
+            <th>Bookmark</th>
+            <th>Latest Bookmark</th>
+            <th>Country</th>
+        </tr>
+        {% for record in data %}
+        <tr>
+            <td>{{ record.profile_name }}</td>
+            <td>{{ record.start_time }}</td>
+            <td>{{ record.duration }}</td>
+            <td>{{ record.attributes }}</td>
+            <td>{{ record.title }}</td>
+            <td>{{ record.supplemental_video_type }}</td>
+            <td>{{ record.device_type }}</td>
+            <td>{{ record.bookmark }}</td>
+            <td>{{ record.latest_bookmark }}</td>
+            <td>{{ record.country }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

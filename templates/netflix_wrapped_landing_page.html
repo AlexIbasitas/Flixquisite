@@ -77,10 +77,12 @@
             flex-direction: column; 
             align-items: center;
             justify-content: space-between; 
-            height: 50%; 
+            height: 60%; 
             padding: 5%; 
             box-sizing: border-box; 
-            overflow: hidden;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: auto; 
         }
 
         .options, .upload-options {
@@ -113,7 +115,7 @@
             color: black;
         }
 
-        button {
+        .wrapped-button, .upload {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -123,23 +125,28 @@
             background-color: rgba(90,88,84,255); 
         }
 
-        button:hover, select:hover {
+        button:hover, select:hover, .upload:hover {
             background-color: rgb(20, 19, 19);
         }
 
 
 
-        #upload-form {
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            padding: 20px;
+/* 
+        button, .upload, input[type='file'] {
+            padding: 10px 20px;
+            border: none;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            display: none; 
-            flex: 1; 
-            justify-content: center;
-            align-items: center;
+            color: #fff;
+            cursor: pointer;
+            margin: 2% 0; 
+            background-color: rgba(90,88,84,255); 
+            font-size: 25px;
         }
+
+        button:hover, select:hover, .upload:hover, input[type='file']:hover {
+            background-color: rgb(20, 19, 19);
+        } */
+
 
     </style>
 </head>
@@ -200,7 +207,7 @@
     <div class="container">
         <!-- Select Your Netflix Wrapped Period Section -->
         <div class="options">
-            <h2 class="header">Select Your Netflix Wrapped Period</h2>
+            <h2 class="header">Select Netflix Wrapped Period</h2>
             <select id="duration" style="background-color: rgba(90,88,84,255); text-align: center;">
                 <option value="3">3 Months Ago</option>
                 <option value="6">6 Months Ago</option>
@@ -211,28 +218,35 @@
     
         <!-- Upload Your Netflix Viewing Activity Section -->
         <div class="upload-options">
-            <h2 class="header">Generate Your Netflix Wrapped</h2>
+            <h2 class="header">Generate Netflix Wrapped</h2>
             <div class="button-container">
-                <button id="view-alex" onclick="viewNetflixWrapped('alex')" style="font-size: 25px;">View Alex's Netflix Wrapped</button>
+                <button class="wrapped-button" id="view-alex" onclick="viewNetflixWrapped('alex')" style="font-size: 25px;">View Alex's Netflix Wrapped</button>
+                
                 <span class="or-text">OR</span>
+                <button class="wrapped-button" id="view-alex" onclick="viewNetflixWrapped('alex')" style="font-size: 25px;">Upload Your Viewing Activity</button>
+                
 
-                <input type="file" name="csv_file" accept=".csv" id="file-input" style="display: none;">
-                <label for="file-input" id="upload-label" style="cursor: pointer; font-size: 25px; background-color: rgba(90,88,84,255); color: white; padding: 10px; border-radius: 5px;">Upload Your Viewing Activity</label>
+
+                <!-- Work on allowing user to upload own csv file Under Construction -->
+                <!-- <form class="upload" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="file-upload" class="custom-upload-button">Upload</label>
+                    {{ form }}
+                </form>
+                <button class="wrapped-button" id="view-alex" onclick="viewNetflixWrapped('user')" style="font-size: 25px;">View User Netflix Wrapped</button>
+
+                {% if error_message %}
+                <p>Error: {{ error_message }}</p>
+                {% endif %} -->
+
             </div>
         </div>
-        <div>
-            <p style="color: black; font-size: 20px;">Download your Netflix Viewing Activity <a target="_blank" style="color: blue;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" href="https://www.netflix.com/settings/viewing-history">here</a></p>
-        </div>
 
 
-        <div id="upload-form" style="display: none;">
-            <form action="/upload-csv/" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <!-- Hidden file input field -->
-                <input type="file" name="csv_file" accept=".csv" style="display: none;" id="file-input">
-                <button type="submit" style="display: none;">Submit</button>
-            </form>
-        </div>
+
+    <div>
+        <p style="color: black; font-size: 20px;">Download your Netflix Viewing Activity <a target="_blank" style="color: blue;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" href="https://www.netflix.com/settings/viewing-history">here</a></p>
+    </div>
 
     </div>
     
@@ -242,28 +256,16 @@
 
 
     <script>
+        // DELETE LATER
+        function viewUnderConstruction(user) {
+            window.location.href = "/under_construction";
+        }
+
         function viewNetflixWrapped(user) {
             var duration = document.getElementById("duration").value;
             window.location.href = "/netflix-wrapped?user=" + user + "&duration=" + duration;
         }
 
-
-        // Function to display selected file name in the label
-        document.getElementById("file-input").addEventListener("change", function() {
-            var label = document.getElementById("upload-label");
-            if (this.files.length > 0) {
-                label.textContent = this.files[0].name; 
-            } else {
-                label.textContent = "Upload Your Viewing Activity"; 
-            }
-        });
-
-        document.getElementById("upload-label").addEventListener("mouseenter", function() {
-            this.style.backgroundColor = "rgb(20, 19, 19)";
-        });
-        document.getElementById("upload-label").addEventListener("mouseleave", function() {
-            this.style.backgroundColor = "rgba(90, 88, 84, 255)";
-        });
     </script>
 </body>
 </html>

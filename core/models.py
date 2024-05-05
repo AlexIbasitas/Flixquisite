@@ -59,3 +59,21 @@ class NetflixMovie(models.Model):
 
     class Meta:
         ordering = ('start_time',)
+
+
+
+class UserMovie(models.Model):
+    # Profile Name,Start Time,Duration,Attributes,Title,Supplemental Video Type,Device Type,Bookmark,Latest Bookmark,Country
+    profile_name = models.CharField(max_length=100)
+    start_time = models.DateTimeField()
+    duration = models.DurationField()
+    attributes = models.TextField()
+    title = models.CharField(max_length=255)
+    supplemental_video_type = models.CharField(max_length=100)
+    device_type = models.CharField(max_length=100)
+    bookmark = models.DurationField()
+    latest_bookmark = models.DurationField()
+    country = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ('start_time',)
