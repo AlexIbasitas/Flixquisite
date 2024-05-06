@@ -95,19 +95,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-#
-# Add Postgres DB and make unapplied migrations
-# Access Django administration via createsuperuser 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'database',
-#         'USER': 'fl0user',
-#         'PASSWORD': 'XDJqKHflm40i',
-#         'HOST': 'ep-dawn-flower-a58d9s9s.us-east-2.aws.neon.fl0.io',
-#         'PORT': '5432',
-#     }
-# }
+
 
 
 # Password validation
