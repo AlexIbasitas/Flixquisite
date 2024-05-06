@@ -85,25 +85,29 @@ WSGI_APPLICATION = 'netflix_pro_site.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # Default SQLITE DB
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'root',
+        'PASSWORD': 'AuvMZZP6puAKfRaE',
+        'HOST': 'postgresql-rds-sandy-fig-5unp.cjuaygek0vtv.us-west-2.rds.amazonaws.com',
+        'PORT': 5432,
+    }
+}
 
 # Add Postgres DB and make unapplied migrations
 # Access Django administration via createsuperuser 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'database',
-        'USER': 'fl0user',
-        'PASSWORD': 'XDJqKHflm40i',
-        'HOST': 'ep-dawn-flower-a58d9s9s.us-east-2.aws.neon.fl0.io',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'database',
+#         'USER': 'fl0user',
+#         'PASSWORD': 'XDJqKHflm40i',
+#         'HOST': 'ep-dawn-flower-a58d9s9s.us-east-2.aws.neon.fl0.io',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
