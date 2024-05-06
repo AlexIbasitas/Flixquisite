@@ -80,7 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'netflix_pro_site.wsgi.application'
 
-###
+###@
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
