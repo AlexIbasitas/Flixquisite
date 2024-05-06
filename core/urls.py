@@ -2,7 +2,9 @@ from django.urls import path
 from . import views
 
 ##set PATH=%PATH%;C:\Program Files\PostgreSQL\16\bin
-#
+# 
+# Removed prometheus-client==0.19.0
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
