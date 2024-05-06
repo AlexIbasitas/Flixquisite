@@ -95,7 +95,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-######
+#######
 # Add Postgres DB and make unapplied migrations
 # Access Django administration via createsuperuser 
 # DATABASES = {
