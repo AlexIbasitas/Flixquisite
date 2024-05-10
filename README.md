@@ -4,7 +4,7 @@
 </a>
 
 <p align="center">
-  Not the usual clone that you can find on the web.
+  An expanded platform modeled after Netflix—one that not only delivers captivating content but also provides users with personalized data       visualizations and insightful statistics based on their viewing history
 </p>
 
 <p align="center">
@@ -46,14 +46,16 @@ Go try it and please let me know if you enjoyed it with a ⭐️, I would apprec
 
 Here you can find the demo link:
 
-- [Demo](https://fakeflix.th3wall.codes)
+- [Demo](https://netflix-pro-3mjv.onrender.com/)
+
+* Please allow time for the Demo to load. Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
 
 ### Test credentials (for lazy users 😓)
 
-> Email: fakeflixuser@test.com<br/>
-> Password: FakeflixTest<br/>
+> Username: test_user<br/>
+> Password: password4test_user<br/>
 
-I have also added a button that lets you sign in anonymously.
+You may also sign in with your Google account.
 
 <br/>
 
