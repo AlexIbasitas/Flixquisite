@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://www.linkedin.com/in/alexibasitas/">
-    <img src="https://www.bluleadz.com/hs-fs/hubfs/LinkedInLogo1.png?width=825&name=LinkedInLogo1.png" alt="LinkedIn style="height: 20px; width: 40px;" />
+    LinkedIn
   </a>
 </p>
 
