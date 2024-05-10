@@ -1,7 +1,10 @@
-<a href="https://netflix-pro-3mjv.onrender.com/login/" align="center">
-  <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
-  <h1 align="center">Netflix Pro</h1>
-</a>
+<div align="center">
+  <a href="https://netflix-pro-3mjv.onrender.com/login/">
+    <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
+    <h1>Netflix Pro</h1>
+  </a>
+</div>
+
 
 
 
