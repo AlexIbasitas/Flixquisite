@@ -55,7 +55,7 @@ Here you can find the demo link:
 
 ⭐ Please allow time for the Demo to load. Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
 
-### Test credentials (for lazy users 😓)
+### Test credentials
 
 > Username: test_user<br/>
 > Password: password4test_user<br/>
@@ -112,6 +112,13 @@ You may also sign in with your Google account.
 ![Screenshot of Netflix Pro Modal Detail](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/modal.gif)
 <br/>
 
+**Netflix Wrapped Landing Page**
+![Screenshot of Netflix Pro Wrapped Landing Page](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_wrapped_landing_page.png)
+<br/>
+
+**Netflix Wrapped**
+![Screenshot of Netflix Pro Wrapped](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_wrapped.gif)
+<br/>
 
 ## 👨🏻‍💻 Run Locally
 
