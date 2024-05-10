@@ -30,7 +30,7 @@
 </p>
 <br/>
 
-https://user-images.githubusercontent.com/25078541/123811962-01474580-d8f4-11eb-83ba-66cded3f321f.mp4
+https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_pro_demo.mp4
 
 <br/>
 
