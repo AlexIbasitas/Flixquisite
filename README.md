@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://twitter.com/Th3Wall25">
-    <img src="https://img.shields.io/twitter/follow/Th3Wall25?style=flat&label=Th3Wall25&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
+  <a href="https://www.linkedin.com/in/alexibasitas/">
+    <img src="https://www.bluleadz.com/hs-fs/hubfs/LinkedInLogo1.png?width=825&name=LinkedInLogo1.png" alt="LinkedIn" />
   </a>
 </p>
 
