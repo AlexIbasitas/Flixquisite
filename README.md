@@ -36,14 +36,15 @@ https://user-images.githubusercontent.com/25078541/123811962-01474580-d8f4-11eb-
 
 ## 🎯 About
 
-I have started this project with the purpose of learning how to structure a Web App of a mid-level complexity integrating the Redux logic.<br/>
-I've tried to replicate the original layout as much as possible and I've also made some improvements in some sections inserting route animations and micro-interactions. I've also inserted a really close clone of Netflix's original splash animation (forked from a famous [codepen from Claudio Bonfati](https://codepen.io/claudio_bonfati/pen/mdryxPv)), made entirely with CSS, as well as the play animation. I have then sampled the original Netflix "ta-duummm" sound and I made it play along with the two animations.<br/>
-I put a lot of effort into it and I hope that you could like it.<br/><br/>
-The Web App redirects you to an authentication page, in which you can choose to sign up or to sign in: you can sign in with your custom account or with your Google account. Once you are logged in and after the splash animation, you will land on the homepage, in which you can find a mix of movies and series divided into rows.<br/>
-Each row represents a movie/series category: you can click on it and you will be redirected to the selected category, a page that loads thousands of movies with an infinite scroll. You can also navigate to the movies page, series page, new & popular page (that contains the upcoming movies/series and the most popular ones) or you can navigate to your favorites page.<br/>
-You can add/remove movies/series through the plus and minus buttons that you can find hovering each poster or opening a single movie's detail modal. If you click on the play button you can enjoy a custom CSS-only play animation with Netflix Pro's brand name.<br/>
-You have also the option to search through TMDB's catalogue using the search functionality inside the fixed navbar: you can search by movie name, actor or movie director.<br/><br/>
-Go try it and please let me know if you enjoyed it with a ⭐️, I would appreciate it a lot.
+I have started this project with the purpose of learning how to structure a Web App and learn more about how Netflix written in Django might work. I was inspired to build this expanded Netflix-inspired platform while completing the Netflix Pathways Summer Bootcamp 2023.<br/>
+
+The Web App redirects you to an sign in page, in which you can choose to sign up or to sign in: you can sign in with your custom account, sign in with the test account provided below, or sign in with your Google account. Once you are logged in, you will land on the homepage, in which you can find movies and series on each row<br/>
+
+In the navigation bar, you may click the "Genre" dropdown menu in order to look at movies sorted by genre. You may also click the "My List" button to view movies/series that have been added to your favorited list.<br/>
+
+You can add/remove movies/series through the "Add to My List" button found in each movie modal. Press the play button to view the title.<br/>
+
+Click the "Netflix Wrapped" button in the navigation bar to view visualizations and statistics related to your watch history. This button will redirect you to a landing page where you may select from a variety of options. You may selec the period of time included in the generated "Netflix Wrapped" and choose to either view Alex's Netflix Wrapped or Upload your own.<br/>
 
 <br/>
 
@@ -55,7 +56,7 @@ Here you can find the demo link:
 
 ⭐ Please allow time for the Demo to load. Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
 
-### Test credentials (for lazy users 😓)
+### Test credentials
 
 > Username: test_user<br/>
 > Password: password4test_user<br/>
@@ -66,6 +67,7 @@ You may also sign in with your Google account.
 
 ## :sparkles: Features
 :heavy_check_mark: &nbsp;&nbsp;Generate "Netflix Wrapped"—data visualizations and insightful statistics based on users' viewing history<br />
+:heavy_check_mark: &nbsp;&nbsp;Select the time frame for Netflix Wrapped, ranging from 3 to 12 months of viewing history.<br />
 :heavy_check_mark: &nbsp;&nbsp;Watch movies and series, old and upcoming<br />
 :heavy_check_mark: &nbsp;&nbsp;Search by title, actor, genrer<br />
 :heavy_check_mark: &nbsp;&nbsp;Add/Remove to/from "My list" functionality<br />
@@ -112,6 +114,13 @@ You may also sign in with your Google account.
 ![Screenshot of Netflix Pro Modal Detail](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/modal.gif)
 <br/>
 
+**Netflix Wrapped Landing Page**
+![Screenshot of Netflix Pro Wrapped Landing Page](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_wrapped_landing_page.png)
+<br/>
+
+**Netflix Wrapped**
+![Screenshot of Netflix Pro Wrapped](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_wrapped.gif)
+<br/>
 
 ## 👨🏻‍💻 Run Locally
 
