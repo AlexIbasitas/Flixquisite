@@ -1,7 +1,10 @@
-<a href="https://netflix-pro-3mjv.onrender.com/login/">
-  <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
-  <h1 align="center">Netflix Pro</h1>
-</a>
+<div style="text-align: center;">
+  <a href="https://netflix-pro-3mjv.onrender.com/login/">
+    <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
+    <h1>Netflix Pro</h1>
+  </a>
+</div>
+
 
 <p align="center">
   An expanded platform modeled after Netflix—one that not only delivers captivating content but also provides users with personalized data       visualizations and insightful statistics based on their viewing history
