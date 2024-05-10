@@ -8,14 +8,10 @@ from django.contrib.auth.decorators import login_required
 import re
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-# import plotly.express as px
 import plotly.graph_objs as go
-# import pandas as pd
-# from django.db.models import F
 import collections
 from datetime import time, timedelta, datetime
 from django.core.cache import cache
-from django.http import HttpResponseServerError
 from django.shortcuts import render
 from django.utils import timezone
 from .forms import UploadFileForm
@@ -317,6 +313,7 @@ def get_user_cached_netflix_viewing_queryset(duration):
 def netflix_wrapped(request):
     user = request.GET.get('user')
     duration = request.GET.get('duration')
+    
 
     # Process the response data
     watchTimeByMonth = getWatchTimeByMonth(user, duration)

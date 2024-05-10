@@ -1,9 +1,6 @@
 from django.urls import path
 from . import views
 
-##set PATH=%PATH%;C:\Program Files\PostgreSQL\16\bin
-# 
-# Removed prometheus-client==0.19.0
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -16,11 +13,6 @@ urlpatterns = [
     path('add-to-my-movies', views.add_to_my_movies, name='add-to-my-movies'),
     path('remove-from-my-movies', views.remove_from_my_movies, name='remove-from-my-movies'),
     path('search', views.search, name='search'),
-
     path('netflix-wrapped', views.netflix_wrapped, name='netflix-wrapped'),
-
     path('netflix-wrapped-landing-page', views.netflix_wrapped_landing_page, name='netflix-wrapped-landing-page'),
-
-    # path('upload', views.upload_csv, name='upload_csv'),
-
 ]

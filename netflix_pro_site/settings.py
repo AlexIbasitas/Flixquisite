@@ -83,7 +83,6 @@ WSGI_APPLICATION = 'netflix_pro_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# Default SQLITE DB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,19 +94,6 @@ DATABASES = {
     }
 }
 
-#######
-# Add Postgres DB and make unapplied migrations
-# Access Django administration via createsuperuser 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'database',
-#         'USER': 'fl0user',
-#         'PASSWORD': 'XDJqKHflm40i',
-#         'HOST': 'ep-dawn-flower-a58d9s9s.us-east-2.aws.neon.fl0.io',
-#         'PORT': '5432',
-#     }
-# }
 
 
 # Password validation
