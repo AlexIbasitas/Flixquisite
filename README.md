@@ -65,7 +65,7 @@ You may also sign in with your Google account.
 <br/>
 
 ## :sparkles: Features
-
+:heavy_check_mark: &nbsp;&nbsp;Display "Netflix Wrapped"—data visualizations and insightful statistics based on users' viewing history
 :heavy_check_mark: &nbsp;&nbsp;Display movies and series, old and upcoming, also from the real Netflix<br />
 :heavy_check_mark: &nbsp;&nbsp;Search by title, actor, genrer<br />
 :heavy_check_mark: &nbsp;&nbsp;Add/Remove to/from "My list" functionality<br />
