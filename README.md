@@ -48,7 +48,7 @@ Here you can find the demo link:
 
 - [Demo](https://netflix-pro-3mjv.onrender.com/)
 
-* Please allow time for the Demo to load. Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
+⭐ Please allow time for the Demo to load. Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process. Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running.
 
 ### Test credentials (for lazy users 😓)
 
