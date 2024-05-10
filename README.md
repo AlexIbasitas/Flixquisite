@@ -42,7 +42,7 @@ The Web App redirects you to an sign in page, in which you can choose to sign up
 
 In the navigation bar, you may click the "Genre" dropdown menu in order to look at movies sorted by genre. You may also click the "My List" button to view movies/series that have been added to your favorited list.<br/>
 
-You can add/remove movies/series through the "Add to My List" button found in each movie modal. Press the play button to view the title<br/>
+You can add/remove movies/series through the "Add to My List" button found in each movie modal. Press the play button to view the title.<br/>
 
 Click the "Netflix Wrapped" button in the navigation bar to view visualizations and statistics related to your watch history. This button will redirect you to a landing page where you may select from a variety of options. You may selec the period of time included in the generated "Netflix Wrapped" and choose to either view Alex's Netflix Wrapped or Upload your own.<br/>
 
