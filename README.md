@@ -1,3 +1,5 @@
+
+https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9e63-9de60e787eef
 <div align="center">
   <a href="https://netflix-pro-3mjv.onrender.com/login/">
     <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
@@ -8,12 +10,11 @@
 
 
 
-Uploading netflix_pro_demo.mp4…
 
 
 
 <p align="center">
-  An expanded platform modeled after Netflix—one that not only delivers captivating content but also provides users with personalized data       visualizations and insightful statistics based on their viewing history
+  An expanded platform modeled after Netflix—one that not only delivers captivating content but also provides users with personalized data visualizations and insightful statistics based on their viewing history
 </p>
 
 <p align="center">
