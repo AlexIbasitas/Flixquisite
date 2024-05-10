@@ -62,20 +62,14 @@ You may also sign in with your Google account.
 ## :sparkles: Features
 
 :heavy_check_mark: &nbsp;&nbsp;Display movies and series, old and upcoming, also from the real Netflix<br />
-:heavy_check_mark: &nbsp;&nbsp;Category related page with infinite scroll<br />
-:heavy_check_mark: &nbsp;&nbsp;Search by title, actor, movie director<br />
+:heavy_check_mark: &nbsp;&nbsp;Search by title, actor, genrer<br />
 :heavy_check_mark: &nbsp;&nbsp;Add/Remove to/from "My list" functionality<br />
 :heavy_check_mark: &nbsp;&nbsp;Detail modal with extra informations about the selected movie/series<br />
-:heavy_check_mark: &nbsp;&nbsp;Customized splash animation (credits: [Claudio Bonfati's pen](https://codepen.io/claudio_bonfati/pen/mdryxPv)) with characteristic Netflix sound<br />
-:heavy_check_mark: &nbsp;&nbsp;Play animation with characteristic Netflix sound<br />
-:heavy_check_mark: &nbsp;&nbsp;Google login<br />
+:heavy_check_mark: &nbsp;&nbsp;Category related pages<br />
+:heavy_check_mark: &nbsp;&nbsp;Google OAuth login<br />
 :heavy_check_mark: &nbsp;&nbsp;User Sign In & User Sign Up<br />
-:heavy_check_mark: &nbsp;&nbsp;Use of React hooks and custom hooks<br />
-:heavy_check_mark: &nbsp;&nbsp;Favourites list persistence (session storage)<br />
-:heavy_check_mark: &nbsp;&nbsp;Responsive layout<br />
-:heavy_check_mark: &nbsp;&nbsp;Swipeable movies list<br />
-:heavy_check_mark: &nbsp;&nbsp;Loading skeletons<br />
-:heavy_check_mark: &nbsp;&nbsp;Route animations and micro-interactions (handled with Framer Motion)<br />
+:heavy_check_mark: &nbsp;&nbsp;Favourites list persistence (PostgreSQL database hosted on Amazon RDS)<br />
+:heavy_check_mark: &nbsp;&nbsp;Scroll movies list<br />
 
 <br/>
 
