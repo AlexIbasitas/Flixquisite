@@ -127,7 +127,7 @@ You may also sign in with your Google account.
 - Clone the project
 
 ```bash
-  git clone https://github.com/Th3Wall/Fakeflix
+  git clone https://github.com/AlexIbasitas/Netflix-Pro.git
 ```
 
 - Go to the project directory
@@ -140,34 +140,15 @@ You may also sign in with your Google account.
 
 ```bash
   npm install
+  pip3 install -r requirements.txt
 ```
 
-- Create a .env file
-
-- Request an API key from TMDB and them add it to the .env file
-
-```
-REACT_APP_API_KEY=REACT_APP_API_KEY
-```
-
-- Create a project inside Google Firebase and export the configuration
-
-- Add the configuration inside the .env file created previously
-
-```
-REACT_APP_FIREBASE_API_KEY=REACT_APP_FIREBASE_API_KEY
-REACT_APP_FIREBASE_AUTH_DOMAIN=REACT_APP_FIREBASE_AUTH_DOMAIN
-REACT_APP_FIREBASE_PROJECT_ID=REACT_APP_FIREBASE_PROJECT_ID
-REACT_APP_FIREBASE_STORAGE_BUCKET=REACT_APP_FIREBASE_STORAGE_BUCKET
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-REACT_APP_FIREBASE_APP_ID=REACT_APP_FIREBASE_APP_ID
-REACT_APP_FIREBASE_MEASUREMEMT_ID=REACT_APP_FIREBASE_MEASUREMEMT_ID
-```
+- Configure your PostgreSQL database in settings.py
 
 - Start the server
 
 ```bash
-  npm start
+  python3 manage.py runserver
 ```
 
 <br/>
