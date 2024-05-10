@@ -1,5 +1,5 @@
 <a href="https://fakeflix.th3wall.codes">
-  <img alt="Fakeflix – Not the usual clone that you can find on the web" src="https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/Fakeflix_readme.png">
+  <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
   <h1 align="center">Netflix Pro</h1>
 </a>
 
@@ -93,16 +93,6 @@ You may also sign in with your Google account.
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [Netlify](https://www.netlify.com) (have a look below) and [Vercel](https://vercel.com/) for the deploy and CI.
 
-### Deploy configuration steps
-
-1. Connect your GitHub account to Netlify
-2. Select the project
-3. In Settings → Build & Deploy → Set **Build command** to : **_npm run build_**
-4. In Settings → Build & Deploy → Set **Publish directory** to : **_build_**
-5. In Settings → Build & Deploy → Set **Environment variables** → Click on **Edit variables** and add yours (ie: TMBd's API key, Firebase configuration).
-
-<br/>
-
 ## 📸 Screenshots
 
 **Sign In**
@@ -161,10 +151,7 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 
 ## 📝 License
 
-[MIT](https://github.com/Th3Wall/Fakeflix/blob/main/LICENSE)
+[MIT](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/LICENSE.bib)
 
 <br/>
 
-
-
-<a href="https://www.buymeacoffee.com/th3wall" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="41" width="174" alt="Buy Me A Coffee" /></a>
