@@ -42,7 +42,7 @@ https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9
 
 I have started this project with the purpose of learning how to structure a Web App and learn more about how Netflix written in Django might work. I was inspired to build this expanded Netflix-inspired platform while completing the Netflix Pathways Summer Bootcamp 2023.<br/>
 
-The Web App redirects you to an sign in page, in which you can choose to sign up or to sign in: you can sign in with your custom account, sign in with the test account provided below, or sign in with your Google account. Once you are logged in, you will land on the homepage, in which you can find movies and series on each row<br/>
+The Web App redirects you to an sign in page, in which you can choose to sign up or to sign in: you can sign in with your custom account, sign in with the test account provided below, or sign in with your Google account. Once you are logged in, you will land on the homepage, in which you can find movies and series in their labeled categories.<br/>
 
 In the navigation bar, you may click the "Genre" dropdown menu in order to look at movies sorted by genre. You may also click the "My List" button to view movies/series that have been added to your favorited list.<br/>
 
