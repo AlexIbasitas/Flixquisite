@@ -106,32 +106,21 @@ You may also sign in with your Google account.
 ## 📸 Screenshots
 
 **Sign In**
-![Screenshot of Fakeflix Sign In](https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/screenshots/Fakeflix_SignIn.jpg)
+![Screenshot of Netflix Pro Sign In](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/login_page.png)
 <br/>
 
 **Sign Up**
-![Screenshot of Fakeflix Sign Up](https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/screenshots/Fakeflix_SignUp.jpg)
+![Screenshot of Netflix Pro Sign Up](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/sign_up_page.png)
 <br/>
 
 **Homepage**
-![Screenshot of Fakeflix Homepage](https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/screenshots/Fakeflix_Home.jpg)
+![Screenshot of Netflix Pro Homepage](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/home_page.png)
 <br/>
 
 **Modal Detail**
-![Screenshot of Fakeflix Modal Detail](https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/screenshots/Fakeflix_DetailModal.jpg)
+![Screenshot of Netflix Pro Modal Detail](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/modal.gif)
 <br/>
 
-**Mobile Experience**
-
-https://user-images.githubusercontent.com/25078541/123543831-b8a35700-d750-11eb-84dc-b53e5a9a997a.mp4
-
-<br/>
-
-**Desktop Experience**
-
-https://user-images.githubusercontent.com/25078541/123811962-01474580-d8f4-11eb-83ba-66cded3f321f.mp4
-
-<br/>
 
 ## 👨🏻‍💻 Run Locally
 
