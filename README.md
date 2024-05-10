@@ -1,9 +1,10 @@
 <div style="text-align: center;">
-  <a href="https://netflix-pro-3mjv.onrender.com/login/">
-    <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
+  <a href="https://netflix-pro-3mjv.onrender.com/login/" style="display: block; margin: 0 auto;">
+    <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif" style="display: block; margin: 0 auto;">
     <h1>Netflix Pro</h1>
   </a>
 </div>
+
 
 
 <p align="center">
