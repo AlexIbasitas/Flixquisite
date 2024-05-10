@@ -1,5 +1,5 @@
 
-https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9e63-9de60e787eef
+
 <div align="center">
   <a href="https://netflix-pro-3mjv.onrender.com/login/">
     <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
@@ -9,7 +9,7 @@ https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9
 
 
 
-
+https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9e63-9de60e787eef
 
 
 
