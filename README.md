@@ -9,7 +9,7 @@
 
 
 
-https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9e63-9de60e787eef
+
 
 
 
@@ -34,9 +34,7 @@ https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9
   <a href="#-license"><strong>License</strong></a> ·
 </p>
 <br/>
-
-![Netflix Pro Demo](https://github.com/AlexIbasitas/Netflix-Pro/raw/main/demo_images/netflix_pro_demo.mp4)
-
+https://github.com/AlexIbasitas/Netflix-Pro/assets/77213807/6ecc9b41-dfcf-4922-9e63-9de60e787eef
 
 <br/>
 
