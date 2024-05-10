@@ -22,7 +22,6 @@
   <a href="#-run-locally"><strong>Run Locally</strong></a> ·
   <a href="#white_check_mark-requirements"><strong>Requirements</strong></a> ·
   <a href="#-license"><strong>License</strong></a> ·
-  <a href="#-star-history"><strong>Star history</strong></a>
 </p>
 <br/>
 
@@ -200,9 +199,6 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 
 <br/>
 
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Th3Wall/Fakeflix&type=Date)](https://star-history.com/#Th3Wall/Fakeflix&Date)
 
 
 <a href="https://www.buymeacoffee.com/th3wall" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="41" width="174" alt="Buy Me A Coffee" /></a>
