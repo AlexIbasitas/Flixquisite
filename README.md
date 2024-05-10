@@ -1,5 +1,5 @@
-<a href="https://fakeflix.th3wall.codes">
-  <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
+<a href="https://netflix-pro-3mjv.onrender.com/login/">
+  <img align="center" alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
   <h1 align="center">Netflix Pro</h1>
 </a>
 
@@ -75,23 +75,19 @@ You may also sign in with your Google account.
 
 ## :rocket: Technologies
 
-- [TMDb API's](https://www.themoviedb.org/)
-- [React](https://reactjs.org/)
-- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-- [React Hooks Form](https://react-hook-form.com/)
-- [React Router](https://reactrouter.com/web/guides/quick-start)
-- [Redux](https://redux.js.org/)
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux Saga](https://redux-saga.js.org/)
-- [Redux Persist](https://github.com/rt2zz/redux-persist)
-- [Redux Logger](https://github.com/LogRocket/redux-logger)
-- [Reselect](https://github.com/reduxjs/reselect)
-- [Firebase](https://firebase.google.com/)
-- [SCSS](https://sass-lang.com/)
-- [SwiperJS](https://swiperjs.com/react)
-- [Framer Motion](https://www.framer.com/motion/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [Netlify](https://www.netlify.com) (have a look below) and [Vercel](https://vercel.com/) for the deploy and CI.
+
+- [Django](https://www.djangoproject.com/)
+- [Django Whitenoise](https://whitenoise.readthedocs.io/en/stable/django.html) a middleware to handle static files
+- [Django Social Auth](https://python-social-auth.readthedocs.io/en/latest/configuration/django.html) for setting up social authentication
+- [Netflix API](https://www.netflix.com/viewingactivity)
+- [Plotly](https://plotly.com/) a Python data visualization library
+- [Google OAuth](https://cloud.google.com/apigee/docs/api-platform/security/oauth/access-tokens)
+- [Psycopg2](https://pypi.org/project/psycopg2/) a PostgreSQL database adapter for Python 
+- [Tailwind CSS](https://tailwindcss.com/)
+- [PostgreSQL](https://www.postgresql.org/) for database
+- [AWS](https://aws.amazon.com/) for hosting database
+- [Render](https://render.com/) for the deploy and CI.
+- [TMDB](https://www.themoviedb.org/) for movie information
 
 ## 📸 Screenshots
 
