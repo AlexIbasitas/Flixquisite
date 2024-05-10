@@ -1,7 +1,12 @@
-<a href="https://fakeflix.th3wall.codes">
-  <img alt="Fakeflix – Not the usual clone that you can find on the web" src="https://cdn.jsdelivr.net/gh/Th3Wall/assets-cdn/Fakeflix/Fakeflix_readme.png">
-  <h1 align="center">Netflix Pro</h1>
-</a>
+<div align="center">
+  <a href="https://netflix-pro-3mjv.onrender.com/login/">
+    <img alt="Netflix Pro" src="https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/Netflix-Pro.gif">
+    <h1>Netflix Pro</h1>
+  </a>
+</div>
+
+
+
 
 <p align="center">
   An expanded platform modeled after Netflix—one that not only delivers captivating content but also provides users with personalized data       visualizations and insightful statistics based on their viewing history
@@ -60,8 +65,8 @@ You may also sign in with your Google account.
 <br/>
 
 ## :sparkles: Features
-
-:heavy_check_mark: &nbsp;&nbsp;Display movies and series, old and upcoming, also from the real Netflix<br />
+:heavy_check_mark: &nbsp;&nbsp;Generate "Netflix Wrapped"—data visualizations and insightful statistics based on users' viewing history<br />
+:heavy_check_mark: &nbsp;&nbsp;Watch movies and series, old and upcoming<br />
 :heavy_check_mark: &nbsp;&nbsp;Search by title, actor, genrer<br />
 :heavy_check_mark: &nbsp;&nbsp;Add/Remove to/from "My list" functionality<br />
 :heavy_check_mark: &nbsp;&nbsp;Detail modal with extra informations about the selected movie/series<br />
@@ -75,33 +80,19 @@ You may also sign in with your Google account.
 
 ## :rocket: Technologies
 
-- [TMDb API's](https://www.themoviedb.org/)
-- [React](https://reactjs.org/)
-- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-- [React Hooks Form](https://react-hook-form.com/)
-- [React Router](https://reactrouter.com/web/guides/quick-start)
-- [Redux](https://redux.js.org/)
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux Saga](https://redux-saga.js.org/)
-- [Redux Persist](https://github.com/rt2zz/redux-persist)
-- [Redux Logger](https://github.com/LogRocket/redux-logger)
-- [Reselect](https://github.com/reduxjs/reselect)
-- [Firebase](https://firebase.google.com/)
-- [SCSS](https://sass-lang.com/)
-- [SwiperJS](https://swiperjs.com/react)
-- [Framer Motion](https://www.framer.com/motion/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [Netlify](https://www.netlify.com) (have a look below) and [Vercel](https://vercel.com/) for the deploy and CI.
 
-### Deploy configuration steps
-
-1. Connect your GitHub account to Netlify
-2. Select the project
-3. In Settings → Build & Deploy → Set **Build command** to : **_npm run build_**
-4. In Settings → Build & Deploy → Set **Publish directory** to : **_build_**
-5. In Settings → Build & Deploy → Set **Environment variables** → Click on **Edit variables** and add yours (ie: TMBd's API key, Firebase configuration).
-
-<br/>
+- [Django](https://www.djangoproject.com/)
+- [Django Whitenoise](https://whitenoise.readthedocs.io/en/stable/django.html) a middleware to handle static files
+- [Django Social Auth](https://python-social-auth.readthedocs.io/en/latest/configuration/django.html) for setting up social authentication
+- [Netflix API](https://www.netflix.com/viewingactivity)
+- [Plotly](https://plotly.com/) a Python data visualization library
+- [Google OAuth](https://cloud.google.com/apigee/docs/api-platform/security/oauth/access-tokens)
+- [Psycopg2](https://pypi.org/project/psycopg2/) a PostgreSQL database adapter for Python 
+- [Tailwind CSS](https://tailwindcss.com/)
+- [PostgreSQL](https://www.postgresql.org/) for database
+- [AWS](https://aws.amazon.com/) for hosting database
+- [Render](https://render.com/) for the deploy and CI.
+- [TMDB](https://www.themoviedb.org/) for movie information
 
 ## 📸 Screenshots
 
@@ -161,10 +152,7 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 
 ## 📝 License
 
-[MIT](https://github.com/Th3Wall/Fakeflix/blob/main/LICENSE)
+[MIT](https://github.com/AlexIbasitas/Netflix-Pro/blob/main/LICENSE.bib)
 
 <br/>
 
-
-
-<a href="https://www.buymeacoffee.com/th3wall" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="41" width="174" alt="Buy Me A Coffee" /></a>
