@@ -30,7 +30,8 @@
 </p>
 <br/>
 
-https://github.com/AlexIbasitas/Netflix-Pro/blob/main/demo_images/netflix_pro_demo.mp4
+![Netflix Pro Demo](https://github.com/AlexIbasitas/Netflix-Pro/raw/main/demo_images/netflix_pro_demo.mp4)
+
 
 <br/>
 
