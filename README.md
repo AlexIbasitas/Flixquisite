@@ -130,10 +130,10 @@ You may also sign in with your Google account.
   git clone https://github.com/AlexIbasitas/Netflix-Pro.git
 ```
 
-- Go to the project directory
+- Go to the project's root directory
 
 ```bash
-  cd fakeflix
+  cd Netflix_Pro
 ```
 
 - Install dependencies
